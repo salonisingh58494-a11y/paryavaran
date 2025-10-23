@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paryavaran - Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="seed.css">
+    <style>
+        :root {
+            --green-light: #d4f1c5;
+            --green: #7ab55c;
+            --green-dark: #3b673d;
+            --font: 'Segoe UI', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font);
+            background: var(--green-light);
+            color: var(--green-dark);
+        }
+        header {
+            background: var(--green);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex: 1;
+            justify-content: center;
+        }
+        nav a {
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            padding: 0 .5rem;
+        }
+        nav a::before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+        nav a:hover::before {
+            transform: scaleX(1);
+        }
+        @keyframes underline {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+        .user-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-bar i,
+        .user-bar .material-symbols-outlined {
+            color: #fff;
+            font-size: 2.4rem;
+            cursor: pointer;
+        }
+
+        .user-bar .profile {
+            width: 42px;
+            height: 42px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: url('indoor-plants/tulip.webp') center/cover no-repeat;
+        }
+
+        .search-bar {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        #plant-search {
+            width: 80%;
+            max-width: 600px;
+            padding: .8rem 1rem;
+            font-size: 1.5rem;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            transition: border-color .3s;
+            border-radius: 80px;
+        }
+        #plant-search:focus {
+            border-color: var(--green);
+            outline: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animation-delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .animation-delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .animation-delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .animation-delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .animation-delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            flex-direction: column;
+            padding: 1rem 0;
+            border-radius: 0 0 0.75rem 0.75rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            color: #4b5563;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background-color: #ecfdf5;
+            color: #10b981;
+        }
+
+        /* Image hover effects */
+        .blog-image {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .blog-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Trending Seeds Styling */
+        .trending-seed-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.2s ease-in-out;
+        }
+        .trending-seed-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .trending-seed-item:hover {
+            transform: translateX(5px);
+        }
+        .trending-seed-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .trending-seed-item .info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            color: var(--green-dark);
+        }
+        .trending-seed-item .info p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+    <header>
+        <div class="logo"><img src="logo.jpg" alt="Paryavaran Logo"></div>
+        <nav>
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="seed.html"><i class="fa-solid fa-seedling"></i> Seed</a>
+            <a href="ferti.html"><i class="fa-solid fa-leaf"></i> Fertiliser</a>
+            <a href="blog.html"><i class="fa-solid fa-envelope"></i> Blog</a>
+        </nav>
+        <div class="user-bar">
+            <section class="search-bar">
+                <input type="text" id="plant-search" placeholder="Search your need.." />
+            </section>
+            <a href="registration.html" title="Register"><i class="fa-solid fa-user-plus"></i></a>
+            <a href="login.html" title="Login"><i class="fa-solid fa-right-to-bracket"></i></a>
+            <i class="fa-solid fa-cart-shopping" title="Cart"></i>
+            <a href="profile.html" title="Profile" class="profile"></a>
+        </div>
+    </header>
+    <section class="relative bg-green-800 text-white py-20 md:py-32 overflow-hidden rounded-b-lg mb-8">
+        <div class="absolute inset-0">
+            <img src="indoor-plants/lifestyle.jpg" alt="Paryavaran Banner"
+                class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-r from-white-900 to-white-700 opacity-70"></div>
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center px-6 animate-fade-in-up">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animation-delay-100">
+                Nurturing Nature: Our Commitment to Paryavaran
+            </h1>
+            <p class="text-lg md:text-xl mb-8 animation-delay-200">
+                Explore insightful articles, tips, and stories dedicated to environmental conservation and sustainable
+                living.
+            </p>
+            <a href="#latest-posts"
+                class="inline-block bg-white text-green-700 hover:bg-green-100 font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animation-delay-300">
+                Read Our Latest Posts
+            </a>
+        </div>
+    </section>
+    <main class="container mx-auto px-6 py-8 md:py-12 lg:py-16">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="lg:w-2/3 bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-lg animate-fade-in animation-delay-400">
+                <article id="latest-posts" class="mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-4 leading-tight">
+                        The Importance of Biodiversity for a Healthy Planet
+                    </h2>
+                    <div class="flex items-center text-gray-500 text-sm mb-6">
+                        <span class="mr-3">By <a href="#"
+                                class="text-green-600 hover:underline">Environmentalist</a></span>
+                        <span class="mr-3">|</span>
+                        <time datetime="2025-07-11">July 11, 2025</time>
+                        <span class="mr-3">|</span>
+                        <span>Category: <a href="#" class="text-green-600 hover:underline">Ecology</a></span>
+                    </div>
+
+                    <img src="indoor-plants/eco.jpg" alt="Biodiversity" class="w-full h-auto rounded-lg mb-8 shadow-md blog-image">
+
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        Biodiversity, the variety of life on Earth, is fundamental to the health of our planet and the
+                        well-being of humanity. It encompasses the diversity within species, between species, and of
+                        ecosystems. From the smallest microorganisms to the largest whales, every living organism plays
+                        a crucial role in maintaining the delicate balance of our natural world.
+                    </p>
+
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Why is Biodiversity Important?</h3>
+                    <ul class="list-disc list-inside mb-6 pl-4 text-gray-700">
+                        <li class="mb-2"><strong>Ecosystem Services:</strong> Biodiversity provides essential ecosystem
+                            services such as pollination of crops, purification of water and air, regulation of climate,
+                            and nutrient cycling.</li>
+                        <li class="mb-2"><strong>Food Security:</strong> A wide range of plants and animals ensures
+                            genetic diversity in our food sources, making them more resilient to diseases and climate
+                            change.</li>
+                        <li class="mb-2"><strong>Medicine:</strong> Many modern medicines are derived from natural
+                            compounds found in plants, animals, and microorganisms. Loss of biodiversity means losing
+                            potential cures.</li>
+                        <li class="mb-2"><strong>Economic Benefits:</strong> Industries like agriculture, forestry, and
+                            fisheries rely directly on biodiversity. Ecotourism also generates significant revenue.</li>
+                        <li class="mb-2"><strong>Cultural and Recreational Value:</strong> Nature provides immense
+                            aesthetic, spiritual, and recreational value, enriching human lives.</li>
+                    </ul>
+
+                    <img src="indoor-plants/biodiversity-within-forests-1.jpg" alt="Forest Ecosystem"
+                        class="w-full h-auto rounded-lg mb-8 shadow-md blog-image">
+
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Threats to Biodiversity</h3>
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        Despite its critical importance, biodiversity is facing unprecedented threats, primarily due to
+                        human activities. Habitat destruction, deforestation, pollution, climate change,
+                        overexploitation of resources, and the introduction of invasive species are leading to a rapid
+                        decline in species populations and the degradation of ecosystems worldwide.
+                    </p>
+
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">What Can We Do?</h3>
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        Protecting biodiversity requires collective effort. Here are a few ways we can contribute:
+                    </p>
+                    <ol class="list-decimal list-inside mb-6 pl-4 text-gray-700">
+                        <li class="mb-2"><strong>Support Conservation Efforts:</strong> Donate to or volunteer for
+                            organizations working to protect endangered species and their habitats.</li>
+                        <li class="mb-2"><strong>Reduce Your Carbon Footprint:</strong> Adopt sustainable practices like
+                            reducing energy consumption, using public transport, and choosing renewable energy sources.
+                        </li>
+                        <li class="mb-2"><strong>Shop Sustainably:</strong> Opt for products that are sustainably
+                            sourced and produced, and reduce consumption of goods that contribute to habitat
+                            destruction.</li>
+                        <li class="mb-2"><strong>Educate Others:</strong> Raise awareness about the importance of
+                            biodiversity and the threats it faces among your friends, family, and community.</li>
+                        <li class="mb-2"><strong>Advocate for Policy Changes:</strong> Support policies that promote
+                            environmental protection, sustainable land use, and climate action.</li>
+                    </ol>
+
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        By understanding the value of biodiversity and taking action, we can help preserve the rich
+                        tapestry of life on Earth for future generations. Let's work together to ensure a healthy and
+                        thriving planet.
+                    </p>
+                    <div
+                        class="mt-8 pt-6 border-t border-gray-200 flex flex-wrap items-center justify-center space-x-4">
+                        <span class="text-gray-600 font-medium mb-2 md:mb-0">Share this article:</span>
+                        <a href="#"
+                            class="text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-facebook-f w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-blue-400 hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-twitter w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-red-600 hover:text-red-800 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-pinterest-p w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-blue-700 hover:text-blue-900 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-linkedin-in w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fas fa-envelope w-6 h-6"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-4 leading-tight">
+                        Sustainable Urban Gardening: Growing Food in Small Spaces
+                    </h2>
+                    <div class="flex items-center text-gray-500 text-sm mb-6">
+                        <span class="mr-3">By <a href="#"
+                                class="text-green-600 hover:underline">Garden Enthusiast</a></span>
+                        <span class="mr-3">|</span>
+                        <time datetime="2025-07-09">July 09, 2025</time>
+                        <span class="mr-3">|</span>
+                        <span>Category: <a href="#" class="text-green-600 hover:underline">Sustainability</a></span>
+                    </div>
+                    <img src="indoor-plants/urban farming.webp" alt="Urban Garden" class="w-full h-auto rounded-lg mb-8 shadow-md blog-image">
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        Urban gardening is gaining popularity as more people seek to connect with nature and grow their
+                        own food, even in limited spaces. Whether you live in an apartment with a small balcony or a
+                        house with a tiny backyard, sustainable urban gardening practices can help you cultivate fresh
+                        produce and contribute to a greener city.
+                    </p>
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Tips for Urban Gardening:</h3>
+                    <ul class="list-disc list-inside mb-6 pl-4 text-gray-700">
+                        <li class="mb-2"><strong>Choose the Right Containers:</strong> Opt for pots, raised beds, or vertical
+                            planters that suit your space and the plants you intend to grow.</li>
+                        <li class="mb-2"><strong>Composting:</strong> Start a small composting system to turn food scraps
+                            into nutrient-rich soil for your plants, reducing waste.</li>
+                        <li class="mb-2"><strong>Water Wisely:</strong> Implement efficient watering methods like drip
+                            irrigation or self-watering pots to conserve water.</li>
+                        <li class="mb-2"><strong>Companion Planting:</strong> Grow compatible plants together to deter pests
+                            and improve growth naturally.</li>
+                        <li class="mb-2"><strong>Utilize Vertical Space:</strong> Maximize your growing area by using
+                            trellises, hanging baskets, and wall-mounted planters.</li>
+                    </ul>
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        Urban gardening not only provides fresh, organic produce but also enhances air quality, supports local
+                        biodiversity, and creates a sense of community. It's a small step that can make a big difference for
+                        both your well-being and the environment.
+                    </p>
+                    <div
+                        class="mt-8 pt-6 border-t border-gray-200 flex flex-wrap items-center justify-center space-x-4">
+                        <span class="text-gray-600 font-medium mb-2 md:mb-0">Share this article:</span>
+                        <a href="#"
+                            class="text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-facebook-f w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-blue-400 hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-twitter w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-red-600 hover:text-red-800 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-pinterest-p w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-blue-700 hover:text-blue-900 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-linkedin-in w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fas fa-envelope w-6 h-6"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article>
+                    <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-4 leading-tight">
+                        The Role of Renewable Energy in Combating Climate Change
+                    </h2>
+                    <div class="flex items-center text-gray-500 text-sm mb-6">
+                        <span class="mr-3">By <a href="#"
+                                class="text-green-600 hover:underline">Energy Expert</a></span>
+                        <span class="mr-3">|</span>
+                        <time datetime="2025-07-06">July 06, 2025</time>
+                        <span class="mr-3">|</span>
+                        <span>Category: <a href="#" class="text-green-600 hover:underline">Climate Change</a></span>
+                    </div>
+                    <img src="indoor-plants/renew energy.jpg" alt="Renewable Energy" class="w-full h-auto rounded-lg mb-8 shadow-md blog-image">
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        Renewable energy sources, such as solar, wind, hydro, and geothermal, are crucial in the global
+                        effort to combat climate change. Unlike fossil fuels, which release greenhouse gases, renewable
+                        energy technologies produce little to no emissions, offering a sustainable path to power our
+                        world.
+                    </p>
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Benefits of Renewable Energy:</h3>
+                    <ul class="list-disc list-inside mb-6 pl-4 text-gray-700">
+                        <li class="mb-2"><strong>Reduced Carbon Emissions:</strong> Significantly lowers the release of
+                            carbon dioxide and other greenhouse gases, mitigating climate change.</li>
+                        <li class="mb-2"><strong>Energy Independence:</strong> Decreases reliance on finite fossil fuel
+                            resources from politically unstable regions.</li>
+                        <li class="mb-2"><strong>Economic Growth:</strong> Creates new jobs in manufacturing, installation,
+                            and maintenance of renewable energy systems.</li>
+                        <li class="mb-2"><strong>Improved Public Health:</strong> Reduces air pollution, leading to fewer
+                            respiratory and other health issues.</li>
+                        <li class="mb-2"><strong>Stable Energy Prices:</strong> Once built, renewable energy facilities have
+                            minimal operating costs, leading to more predictable electricity prices.</li>
+                    </ul>
+                    <p class="mb-6 leading-relaxed text-gray-700">
+                        Investing in and transitioning to renewable energy is not just an environmental imperative but also
+                        an economic opportunity. It's a pathway to a cleaner, healthier, and more sustainable future for
+                        everyone.
+                    </p>
+                    <div
+                        class="mt-8 pt-6 border-t border-gray-200 flex flex-wrap items-center justify-center space-x-4">
+                        <span class="text-gray-600 font-medium mb-2 md:mb-0">Share this article:</span>
+                        <a href="#"
+                            class="text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-facebook-f w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-blue-400 hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-twitter w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-red-600 hover:text-red-800 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-pinterest-p w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-blue-700 hover:text-blue-900 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fab fa-linkedin-in w-6 h-6"></i>
+                        </a>
+                        <a href="#"
+                            class="text-gray-700 hover:text-gray-900 transition duration-300 ease-in-out transform hover:scale-110">
+                            <i class="fas fa-envelope w-6 h-6"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+            <aside class="lg:w-1/3 flex flex-col gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg animate-fade-in animation-delay-500">
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">Search Blog</h3>
+                    <div class="relative">
+                        <input type="text" placeholder="Search articles..."
+                            class="w-full p-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <button
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-green-700">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg animate-fade-in animation-delay-600">
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">Recent Posts</h3>
+                    <ul>
+                        <li class="mb-3 pb-3 border-b border-gray-100 last:border-b-0 last:pb-0">
+                            <a href="#" class="text-gray-700 hover:text-green-700 font-medium transition duration-200">
+                                The Role of Renewable Energy in Combating Climate Change
+                            </a>
+                            <span class="block text-sm text-gray-500">July 06, 2025</span>
+                        </li>
+                        <li class="mb-3 pb-3 border-b border-gray-100 last:border-b-0 last:pb-0">
+                            <a href="#" class="text-gray-700 hover:text-green-700 font-medium transition duration-200">
+                                Sustainable Urban Gardening: Growing Food in Small Spaces
+                            </a>
+                            <span class="block text-sm text-gray-500">July 09, 2025</span>
+                        </li>
+                        <li class="mb-3 pb-3 border-b border-gray-100 last:border-b-0 last:pb-0">
+                            <a href="#" class="text-gray-700 hover:text-green-700 font-medium transition duration-200">
+                                The Importance of Biodiversity for a Healthy Planet
+                            </a>
+                            <span class="block text-sm text-gray-500">July 11, 2025</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg animate-fade-in animation-delay-700">
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">Categories</h3>
+                    <ul>
+                        <li class="mb-2">
+                            <a href="#" class="text-gray-700 hover:text-green-700 transition duration-200">Ecology
+                                (5)</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#"
+                                class="text-gray-700 hover:text-green-700 transition duration-200">Sustainability
+                                (8)</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-gray-700 hover:text-green-700 transition duration-200">Conservation
+                                (3)</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-gray-700 hover:text-green-700 transition duration-200">Climate
+                                Change (6)</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg animate-fade-in animation-delay-800">
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">Popular Tags</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#" class="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">#Environment</a>
+                        <a href="#" class="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">#Nature</a>
+                        <a href="#" class="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">#Gardening</a>
+                        <a href="#" class="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">#Sustainability</a>
+                        <a href="#" class="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">#RenewableEnergy</a>
+                        <a href="#" class="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">#ClimateAction</a>
+                    </div>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-green-600 to-green-800 text-white p-6 rounded-xl shadow-lg animate-fade-in animation-delay-900">
+                    <h3 class="text-xl font-semibold mb-4">Join Our Newsletter</h3>
+                    <p class="text-sm mb-4 opacity-90">Stay updated with our latest articles and environmental
+                        initiatives.</p>
+                    <form>
+                        <input type="email" placeholder="Your email address"
+                            class="w-full p-3 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-white mb-3">
+                        <button type="submit"
+                            class="w-full bg-white text-green-700 font-semibold py-3 rounded-md hover:bg-green-100 transition duration-300 ease-in-out transform hover:scale-105">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg animate-fade-in animation-delay-1000">
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">Follow Us</h3>
+                    <p class="text-sm mb-4 opacity-90">Connect with us on social media for daily updates and inspiration.</p>
+                    <div class="flex justify-center space-x-6 text-2xl">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out transform hover:scale-125"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-blue-400 hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-125"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-pink-600 hover:text-pink-800 transition duration-300 ease-in-out transform hover:scale-125"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-blue-700 hover:text-blue-900 transition duration-300 ease-in-out transform hover:scale-125"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-red-600 hover:text-red-800 transition duration-300 ease-in-out transform hover:scale-125"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg animate-fade-in animation-delay-1100">
+                    <h3 class="text-xl font-semibold text-green-700 mb-4">Trending Seeds</h3>
+                    <div class="trending-seed-item">
+                        <img src="indoor-plants/herb seed.webp" alt="Organic Herb Seeds">
+                        <div class="info">
+                            <h4>Organic Herb Seeds</h4>
+                            <p>Perfect for your kitchen garden. High yield & fresh aroma.</p>
+                        </div>
+                    </div>
+                    <div class="trending-seed-item">
+                        <img src="indoor-plants/Exotic Flower Seeds.jpg" alt="Exotic Flower Seeds">
+                        <div class="info">
+                            <h4>Exotic Flower Seeds</h4>
+                            <p>Bring vibrant colors to your home with these unique blooms.</p>
+                        </div>
+                    </div>
+                    <div class="trending-seed-item">
+                        <img src="indoor-plants/Vegetable Garden Pack.jpg" alt="Vegetable Garden Pack">
+                        <div class="info">
+                            <h4>Vegetable Garden Pack</h4>
+                            <p>Grow your own fresh vegetables year-round.</p>
+                        </div>
+                    </div>
+                    <div class="trending-seed-item">
+                        <img src="indoor-plants/sowing5.jpg" alt="Vegetable Garden Pack">
+                        <div class="info">
+                            <h4>Garden Pack</h4>
+                            <p>Bring refreshment to your home.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+
+        <section class="mt-16 bg-green-700 text-white py-16 px-6 rounded-xl shadow-lg text-center animate-fade-in animation-delay-1000"
+            style="background-image: url('indoor-plants/cta-bg.jpg'); background-size: cover; background-position: center;">
+            <div class="bg-black bg-opacity-50 p-8 rounded-lg">
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">Make a Difference Today!</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                    Join our community of environmental advocates and contribute to a healthier planet. Every action,
+                    big or small, helps create a sustainable future.
+                </p>
+                <a href="signup-login.html"
+                    class="inline-block bg-white text-green-700 hover:bg-green-100 font-semibold py-4 px-10 rounded-full shadow-xl transition duration-300 ease-in-out transform hover:scale-105">
+                    Get Involved Now
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>About Us</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Paryavaran Blog</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping & Delivery</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Track Your Order</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Rewards</h4>
+                <ul>
+                    <li><a href="#">Paryavaran Rewards Program</a></li>
+                    <li><a href="#">Refer a Friend</a></li>
+                    <li><a href="#">Exclusive Offers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column contact-us-footer">
+                <h4>Contact Us</h4>
+                <p><i class="fa-solid fa-phone"></i> +91 12345 67890</p>
+                <p><i class="fa-solid fa-envelope"></i> info@paryavaran.com</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="newsletter-signup">
+                    <h4>Sign Up for Newsletter</h4>
+                    <form action="#" method="POST">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Paryavaran. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        const products = [
+  "Areca Palm", "Peace Lily", "Snake Plant", "Money Plant", "Succulent",
+  "Ornamental Plants", "Seeds", "Fertilizer", "Ceramic Pots", "Gardening Tools",
+  "Planters", "Self watering Spikes", "Exotic Flower Seeds", "Begonia rex red heart plants"
+];
+
+const searchInput = document.getElementById("plant-search");
+const suggestionsBox = document.getElementById("suggestions");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  suggestionsBox.innerHTML = "";
+
+  if (query) {
+    const filtered = products.filter(item => item.toLowerCase().includes(query));
+    if (filtered.length > 0) {
+      suggestionsBox.style.display = "block";
+      filtered.forEach(item => {
+        const div = document.createElement("div");
+        div.textContent = item;
+
+        div.onclick = () => {
+          searchInput.value = item;
+          suggestionsBox.style.display = "none";
+
+          // Navigation / Filter behavior
+          switch (item.toLowerCase()) {
+            case "seeds":
+            case "exotic flower seeds":
+              window.location.href = "seed.html";
+              break;
+            case "fertilizer":
+              window.location.href = "ferti.html";
+              break;
+            case "ornamental plants":
+              window.location.href = "shop.html";
+              break;
+            case "ceramic pots":
+            case "planters":
+              document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
+              break;
+            default:
+              // Try to match with plants array
+              const found = plants.find(p => p.name.toLowerCase() === item.toLowerCase());
+              if (found) {
+                renderPlants([found]); // show only that plant
+                document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
+              } else {
+                document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
+              }
+          }
+        };
+
+        suggestionsBox.appendChild(div);
+      });
+    } else {
+      suggestionsBox.style.display = "none";
+    }
+  } else {
+    suggestionsBox.style.display = "none";
+  }
+});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Orders</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: #f4f6f9;
+      transition: all 0.3s ease;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      flex-shrink: 0;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: width 0.3s ease;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover { background: #34495e; }
+    .sidebar a.active { background: #16a085; }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 30px;
+      transition: margin-left 0.3s;
+    }
+
+    h1 { margin-bottom: 25px; text-align: center; color: #34495e; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #16a085;
+      color: white;
+    }
+
+    button.action {
+      padding: 8px 12px;
+      margin: 2px;
+      border: none;
+      background: #16a085;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    button.action:hover { background: #138f75; transform: translateY(-2px); }
+
+    .status-pending { color: orange; font-weight: bold; }
+    .status-accepted { color: green; font-weight: bold; }
+    .status-rejected { color: red; font-weight: bold; }
+
+    /* Animations */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Responsive */
+    @media(max-width: 768px){
+      .sidebar { width: 60px; }
+      .sidebar h2 { display: none; }
+      .sidebar a { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Paryavaran</h2>
+    <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="manage-products.html"><i class="fas fa-box"></i> Products</a>
+    <a href="manage-orders.html" class="active"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="manage-users.html"><i class="fas fa-users"></i> Users</a>
+    <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Shop</a>
+    <a href="logout.html"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Manage Orders</h1>
+
+    <!-- Orders Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>User</th><th>Product</th><th>Status</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="orderTable"></tbody>
+    </table>
+  </div>
+
+  <script>
+const apiUrl = "http://localhost:5000/api/orders";
+
+// Fetch orders from MongoDB
+async function fetchOrders() {
+  const res = await fetch(apiUrl);
+  const orders = await res.json();
+  renderOrders(orders);
+}
+
+// Update order status
+async function updateOrderStatus(id, status) {
+  await fetch(`${apiUrl}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status })
+  });
+  fetchOrders();
+}
+
+// Render orders table
+function renderOrders(orders) {
+  const tbody = document.getElementById("orderTable");
+  tbody.innerHTML = "";
+  orders.forEach(o => {
+    let statusClass =
+      o.status === "Pending" ? "status-pending" :
+      o.status === "Accepted" ? "status-accepted" : "status-rejected";
+
+    tbody.innerHTML += `
+      <tr>
+        <td>${o._id}</td>
+        <td>${o.user}</td>
+        <td>${o.product}</td>
+        <td class="${statusClass}">${o.status}</td>
+        <td>
+          <button class="action" onclick='updateOrderStatus("${o._id}", "Accepted")'>
+            <i class="fas fa-check"></i> Accept
+          </button>
+          <button class="action" onclick='updateOrderStatus("${o._id}", "Rejected")'>
+            <i class="fas fa-times"></i> Reject
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+// Initial fetch
+fetchOrders();
+
+</script>
+
+
+</body>
+</html>

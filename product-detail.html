@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - Paryavaran</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f6fff6;
+      padding: 2rem;
+    }
+
+    .product-container {
+      display: flex;
+      gap: 3rem;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 1000px;
+      margin: auto;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .product-container:hover {
+      transform: scale(1.01);
+    }
+
+    .product-image img {
+      width: 350px;
+      height: 350px;
+      border-radius: 1rem;
+      object-fit: cover;
+    }
+
+    .product-details {
+      flex: 1;
+    }
+
+    .product-details h2 {
+      color: #2e7d32;
+      margin-bottom: 1rem;
+    }
+
+    .price {
+      color: #388e3c;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .rating i {
+      color: gold;
+      font-size: 1.2rem;
+      margin-right: 0.2rem;
+    }
+
+    .description {
+      margin: 1.5rem 0;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .btn-cart {
+      background: #43a047;
+      color: white;
+    }
+
+    .btn-cart:hover {
+      background: #2e7d32;
+    }
+
+    .btn-buy {
+      background: #ff7043;
+      color: white;
+    }
+
+    .btn-buy:hover {
+      background: #e64a19;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      color: #2e7d32;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-container">
+    <div class="product-image">
+      <img id="product-image" src="" alt="Product Image">
+    </div>
+    <div class="product-details">
+      <h2 id="product-name"></h2>
+      <p class="price" id="product-price"></p>
+      <div class="rating" id="product-rating"></div>
+      <p class="description">
+        Tulip bulbs are one of the most beloved spring flowers, known for their vibrant colors and graceful shapes. Perfect for garden borders or pots, they add elegance and freshness to your outdoor or indoor spaces.
+      </p>
+      <div class="buttons">
+        <button class="btn btn-cart" id="addToCartBtn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+        <button class="btn btn-buy" id="buyNowBtn"><i class="fa-solid fa-bag-shopping"></i> Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <a href="seed.html" class="back-link">← Back to Seeds</a>
+
+  <script>
+    // Load selected product from localStorage
+    const productData = JSON.parse(localStorage.getItem("selectedProduct"));
+    if (productData) {
+      document.getElementById("product-name").innerText = productData.name;
+      document.getElementById("product-price").innerText = productData.price;
+      document.getElementById("product-image").src = productData.image;
+
+      // Add rating stars
+      const ratingContainer = document.getElementById("product-rating");
+      const stars = productData.rating.trim().length;
+      const fullStars = Math.min(stars, 5);
+      for (let i = 0; i < fullStars; i++) {
+        const star = document.createElement("i");
+        star.classList.add("fa-solid", "fa-star");
+        ratingContainer.appendChild(star);
+      }
+    }
+
+    // Add to cart functionality
+    document.getElementById("addToCartBtn").addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(productData);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${productData.name} added to your cart!`);
+    });
+
+    // Buy now functionality
+    document.getElementById("buyNowBtn").addEventListener("click", () => {
+      localStorage.setItem("buyNowProduct", JSON.stringify(productData));
+      window.location.href = "checkout.html"; // You can later design a checkout page
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f4f6f9;
+  }
+
+  /* Login Page */
+  #loginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: #ecf0f1;
+  }
+
+  #loginBox {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 300px;
+  }
+
+  #loginBox h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  #loginBox input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.2s;
+  }
+
+  #loginBox input:focus {
+    border-color: #3b673d;
+    box-shadow: 0 0 5px #3b673d;
+  }
+
+  #loginBox button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #3b673d;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+
+  #loginBox button:hover {
+    background: #7ab55c;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background: #2c3e50;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: 20px;
+    transition: 0.3s;
+  }
+
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .sidebar a:hover {
+    background: #34495e;
+  }
+
+  /* Content */
+  .content {
+    margin-left: 220px;
+    padding: 30px;
+    transition: margin-left 0.3s;
+  }
+
+  h1 {
+    color: #2c3e50;
+  }
+
+  p.welcome {
+    margin-bottom: 30px;
+    color: #555;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  .card i {
+    font-size: 2rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: rgba(0,0,0,0.1);
+  }
+
+  .card h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+    color: #2c3e50;
+  }
+
+  .card p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  /* Table for Users */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background: #34495e;
+    color: white;
+  }
+
+  .form-inline {
+    margin: 15px 0;
+  }
+
+  .form-inline input {
+    padding: 8px;
+    margin-right: 8px;
+  }
+
+  .form-inline button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #3b673d;
+    color: white;
+    cursor: pointer;
+  }
+
+  .form-inline button:hover {
+    background: #7ab55c;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Login Page -->
+<div id="loginPage">
+  <div id="loginBox">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar" style="display:none;">
+  <h2>Admin Panel</h2>
+  <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="manage-products.html"><i class="fas fa-box"></i> Products</a>
+    <a href="manage-orders.html"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="manage-users.html"><i class="fas fa-users"></i> Users</a>
+    <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Shop</a>
+    <a href="#"><i class="fas fa-right-from-bracket"></i> Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="content" id="content" style="display:none;">
+  <h1>Welcome Admin!</h1>
+  <p class="welcome">Here’s a quick overview of your platform. You can manage users, products, and orders from this dashboard.</p>
+  <div class="cards">
+    <div class="card" id="userCard">
+      <i class="fas fa-users"></i>
+      <p>Total Users</p>
+      <h2 id="userCount">0</h2>
+    </div>
+    <div class="card" id="productCard">
+      <i class="fas fa-box"></i>
+      <p>Total Products</p>
+      <h2 id="productCount">0</h2>
+    </div>
+    <div class="card" id="orderCard">
+      <i class="fas fa-shopping-cart"></i>
+      <p>Total Orders</p>
+      <h2 id="orderCount">0</h2>
+    </div>
+  </div>
+  <div id="userSection"></div>
+</div>
+<h2>All Orders - Admin Panel</h2>
+<div id="admin-orders"></div>
+<script>
+  // Sample Data
+  let users = [
+    { id: 1, name: "Saloni Singh", email: "saloni@mail.com", password: "12345" },
+    { id: 2, name: "Admin User", email: "admin@mail.com", password: "admin123" }
+  ];
+  let products = [
+    { id: 1, name: "Rose Plant" },
+    { id: 2, name: "Neem Fertilizer" }
+  ];
+  let orders = [
+    { id: 1, user: "Saloni Singh", product: "Rose Plant" },
+    { id: 2, user: "Admin User", product: "Neem Fertilizer" }
+  ];
+
+  function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if(username === "admin" && password === "1234") {
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("sidebar").style.display = "block";
+      document.getElementById("content").style.display = "block";
+      updateDashboardCounts();
+    } else {
+      alert("Invalid Username or Password!");
+    }
+  }
+
+  function logout() {
+    document.getElementById("loginPage").style.display = "flex";
+    document.getElementById("sidebar").style.display = "none";
+    document.getElementById("content").style.display = "none";
+  }
+
+  function updateDashboardCounts() {
+    document.getElementById("userCount").innerText = users.length;
+    document.getElementById("productCount").innerText = products.length;
+    document.getElementById("orderCount").innerText = orders.length;
+  }
+
+  function showDashboard() {
+    document.getElementById("userSection").innerHTML = "";
+  }
+
+  function showUsers() {
+    let html = `<div class="form-inline">
+      <input type="text" id="newName" placeholder="Name">
+      <input type="email" id="newEmail" placeholder="Email">
+      <input type="password" id="newPassword" placeholder="Password">
+      <button onclick="addUser()">Add User</button>
+    </div>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Password</th></tr>
+      </thead>
+      <tbody id="userTable"></tbody>
+    </table>`;
+    document.getElementById("userSection").innerHTML = html;
+    renderUsers();
+  }
+
+  function renderUsers() {
+    const tbody = document.getElementById("userTable");
+    tbody.innerHTML = "";
+    users.forEach(u => {
+      tbody.innerHTML += `<tr>
+        <td>${u.id}</td>
+        <td>${u.name}</td>
+        <td>${u.email}</td>
+        <td>${u.password}</td>
+      </tr>`;
+    });
+  }
+
+  function addUser() {
+    const name = document.getElementById("newName").value;
+    const email = document.getElementById("newEmail").value;
+    const password = document.getElementById("newPassword").value;
+    if(name && email && password){
+      users.push({id: users.length+1, name, email, password});
+      renderUsers();
+      document.getElementById("newName").value = "";
+      document.getElementById("newEmail").value = "";
+      document.getElementById("newPassword").value = "";
+      updateDashboardCounts();
+    } else alert("Please fill all fields!");
+  }
+
+  function showProducts() {
+    alert("Manage Products page will be implemented.");
+  }
+
+  function showOrders() {
+    alert("Manage Orders page will be implemented.");
+  }
+
+</script>
+</body>
+</html>

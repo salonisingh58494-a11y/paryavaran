@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    :root {
+            --green-light: #d4f1c5;
+            --green: #7ab55c;
+            --green-dark: #3b673d;
+            --font: 'Segoe UI', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font);
+            background: var(--green-light);
+            color: var(--green-dark);
+        }
+
+        /* Header */
+        header {
+            background: var(--green);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Base link style */
+        nav a {
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            padding: 0 .5rem;
+        }
+
+        /* Create a hidden underline */
+        nav a::before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+
+        /* Reveal the underline on hover */
+        nav a:hover::before {
+            transform: scaleX(1);
+        }
+
+
+        @keyframes underline {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        .user-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-bar i,
+        .user-bar .material-symbols-outlined {
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+
+        .user-bar .profile {
+            width: 42px;
+            height: 42px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: url('indoor-plants/tulip.webp') center/cover no-repeat;
+        }
+
+        /* Search bar */
+        .search-bar {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        #plant-search {
+            width: 80%;
+            max-width: 600px;
+            padding: .8rem 1rem;
+            font-size: 1.5rem;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            transition: border-color .3s;
+            border-radius: 80px;
+        }
+
+        #plant-search:focus {
+            border-color: var(--green);
+            outline: none;
+        }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      background: #7ab55c;
+      padding: 1rem;
+      width: 220px;
+      transition: all 0.3s ease;
+    }
+
+    .nav {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nav li {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      border-radius: 6px;
+      color: #333;
+    }
+
+    .nav li i {
+      margin-right: 10px;
+      color: #fff;
+      width: 20px;
+      text-align: center;
+    }
+
+    .nav li:hover,
+    .nav .active {
+      background-color: #3b673d;
+      color: white;
+    }
+
+    .content {
+      background: white;
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-photo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .profile-photo img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #3b673d;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-photo:hover img {
+      transform: scale(1.05);
+    }
+
+    .profile-photo input {
+      display: none;
+    }
+
+    .upload-icon {
+      position: absolute;
+      bottom: 0;
+      right: 120px;
+      background: #fff;
+      border-radius: 50%;
+      padding: 6px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #3b673d;
+      outline: none;
+    }
+
+    .buttons {
+      grid-column: span 2;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .cancel {
+      background: #ccc;
+      color: black;
+    }
+
+    .save {
+      background: #3b673d;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* FOOTER */
+.site-footer {
+  background-color: #2e7d32;
+  color: #fff;
+  padding: 3rem 0;
+  font-family: var(--font);
+  margin-top: 2rem; /* Add some space above the footer */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  margin: 1rem;
+}
+
+.footer-column h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--green-light);
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.footer-column h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: var(--green);
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 0.7rem;
+}
+
+.footer-column ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #fff;
+}
+
+.contact-us-footer p {
+  margin-bottom: 0.5rem;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+}
+
+.contact-us-footer p i {
+  margin-right: 10px;
+  color: var(--green);
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.7rem;
+  margin-right: 1rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: var(--green);
+}
+
+.newsletter-signup {
+  margin-top: 1.5rem;
+}
+
+.newsletter-signup h4 {
+  margin-bottom: 0.8rem;
+  color: var(--green-light);
+}
+
+.newsletter-signup form {
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.newsletter-signup input[type="email"] {
+  border: none;
+  padding: 0.8rem 1rem;
+  flex-grow: 1;
+  font-size: 1.5rem;
+  outline: none;
+}
+
+.newsletter-signup button {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.0rem;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-signup button:hover {
+  background-color: var(--green-light);
+  color: var(--green-dark);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #aaa;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    min-width: unset;
+    width: 90%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-column h4::after {
+    margin: 0.5rem auto 0;
+  }
+
+  .social-icons {
+    margin-top: 1rem;
+  }
+
+  .newsletter-signup form {
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .newsletter-signup input[type="email"] {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .newsletter-signup button {
+    width: 100%;
+  }
+}
+.section { display: none; }
+.section.active { display: block; }
+
+  </style>
+</head>
+<body>
+     <header>
+        <div class="logo"><img src="logo.jpg" alt="Paryavaran Logo"></div>
+        <nav>
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="seed.html"><i class="fa-solid fa-seedling"></i> Seed</a>
+            <a href="ferti.html"><i class="fa-solid fa-leaf"></i> Fertiliser</a>
+            <a href="blog.html"><i class="fa-solid fa-envelope"></i> Blog</a>
+        </nav>
+        <div class="user-bar">
+            <section class="search-bar">
+  <input type="text" id="plant-search" placeholder="Search your need.." autocomplete="off"/>
+  <div id="suggestions" class="suggestions"></div>
+</section>
+            <a href="registration.html" title="Register"><i class="fa-solid fa-user-plus"></i></a>
+            <a href="login.html" title="Login"><i class="fa-solid fa-right-to-bracket"></i></a>
+            <i class="fa-solid fa-cart-shopping" title="Cart"></i>
+            <a href="profile.html" title="Profile" class="profile"></a>
+
+        </div>
+    </header>
+  <div class="container">
+    <!-- <aside class="sidebar">
+      <ul class="nav">
+        <li class="active"><i class="fas fa-user-edit"></i> Edit Profile</li>
+        <li><i class="fas fa-bell"></i> Notification</li>
+        <li><i class="fas fa-lock"></i> Security</li>
+        <li><i class="fas fa-paint-brush"></i> Appearance</li>
+        <li><i class="fas fa-question-circle"></i> Help</li>
+      </ul>
+    </aside> -->
+
+    <main class="content">
+      <h2><i class="fas fa-user"></i> Edit Profile</h2>
+      
+
+      <div class="profile-photo">
+        <img id="avatar" src="indoor-plants/alumi plant.webp" alt="Profile Photo">
+        <label class="upload-icon">
+          <i class="fas fa-camera"></i>
+          <input type="file" accept="image/*" onchange="previewImage(event)">
+        </label>
+      </div>
+
+      <form id="profileForm">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" name="firstName" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" name="lastName" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" name="address" />
+        </div>
+        <div class="form-group">
+          <label>Contact Number</label>
+          <input type="text" name="contact" />
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <select name="city">
+            <option>Surat</option>
+            <option>Delhi</option>
+            <option>Mumbai</option>
+            <option>Chandigarh</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>State</label>
+          <input type="text" name="state" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" required />
+        </div>
+        <div class="buttons">
+          <button type="button" class="cancel">Cancel</button>
+          <button type="submit" class="save">Save</button>
+          <button type="button" onclick="getProfile()" style="background:#3b673d;color:white;">Get</button>
+          <button type="button" onclick="deleteProfile()" style="background:#3b673d;color:white;">Delete</button>
+        </div>
+      </form>
+    </main>
+  </div>
+<footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Our Mission</a></li>
+          <li><a href="#">Paryavaran Blog</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Track Your Order</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Rewards</h4>
+        <ul>
+          <li><a href="#">Paryavaran Rewards Program</a></li>
+          <li><a href="#">Refer a Friend</a></li>
+          <li><a href="#">Exclusive Offers</a></li>
+        </ul>
+      </div>
+      <div class="footer-column contact-us-footer">
+        <h4>Contact Us</h4>
+        <p><i class="fa-solid fa-phone"></i> +91 12345 67890</p>
+        <p><i class="fa-solid fa-envelope"></i> info@paryavaran.com</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="newsletter-signup">
+          <h4>Sign Up for Newsletter</h4>
+          <form action="#" method="POST">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Paryavaran. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+  const apiURL = "http://localhost:5000/api/profile";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("profileForm");
+
+    // 🔹 Save / Update Profile
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = collectFormData();
+
+      fetch(apiURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+        .then((res) => res.json())
+        .then((data) => alert(data.message || "Profile saved!"))
+        .catch(() => alert("Error saving profile."));
+    });
+
+    document.querySelector(".cancel").addEventListener("click", () => {
+      form.reset();
+    });
+  });
+
+  function getProfile() {
+    const email = document.querySelector("input[name='email']").value;
+    if (!email) return alert("Please enter email to fetch profile");
+
+    fetch(apiURL + "/" + email)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          fillForm(data);
+        }
+      })
+      .catch(() => alert("Error fetching profile"));
+  }
+
+  function deleteProfile() {
+    const email = document.querySelector("input[name='email']").value;
+    if (!email) return alert("Please enter email to delete profile");
+
+    fetch(apiURL + "/" + email, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => alert(data.message || "Profile deleted"))
+      .catch(() => alert("Error deleting profile"));
+  }
+
+  function collectFormData() {
+    const form = document.getElementById("profileForm");
+    const data = {};
+    for (const el of form.elements) {
+      if (el.name) data[el.name] = el.value;
+    }
+    return data;
+  }
+
+  function fillForm(data) {
+    const form = document.getElementById("profileForm");
+    for (const key in data) {
+      if (form.elements[key]) {
+        form.elements[key].value = data[key];
+      }
+    }
+  }
+
+  function previewImage(event) {
+    const avatar = document.getElementById("avatar");
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => (avatar.src = e.target.result);
+      reader.readAsDataURL(file);
+    }
+  }
+  // Sidebar Navigation
+document.querySelectorAll(".sidebar .nav li").forEach((item, index) => {
+  item.addEventListener("click", () => {
+    document.querySelectorAll(".sidebar .nav li").forEach(li => li.classList.remove("active"));
+    item.classList.add("active");
+
+    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+    const sections = ["edit-profile-section", "notification-section", "security-section", "appearance-section", "help-section"];
+    document.getElementById(sections[index]).classList.add("active");
+  });
+});
+
+// Notification Settings
+function saveNotification() {
+  const email = document.getElementById("emailNotify").checked;
+  const sms = document.getElementById("smsNotify").checked;
+  localStorage.setItem("notifications", JSON.stringify({ email, sms }));
+  alert("Notification preferences saved!");
+}
+
+// Security - Change Password
+function updatePassword() {
+  const oldPass = document.getElementById("oldPass").value;
+  const newPass = document.getElementById("newPass").value;
+  if (!oldPass || !newPass) {
+    alert("Please fill both fields!");
+    return;
+  }
+  alert("Password updated successfully! (Demo Only)");
+}
+
+// Appearance - Theme Switcher
+function setTheme(mode) {
+  if (mode === "dark") {
+    document.body.style.background = "#1c1c1c";
+    document.body.style.color = "#f5f5f5";
+  } else {
+    document.body.style.background = "#d4f1c5";
+    document.body.style.color = "#3b673d";
+  }
+  localStorage.setItem("theme", mode);
+}
+
+// Load Saved Theme
+window.onload = () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) setTheme(savedTheme);
+};
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Users</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: #f4f6f9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      flex-shrink: 0;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+    .sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover { background: #34495e; }
+    .sidebar a.active { background: #16a085; }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+    h1 { margin-bottom: 25px; text-align: center; color: #34495e; }
+
+    .form-inline {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .form-inline input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      transition: all 0.3s;
+    }
+    .form-inline input:focus { border-color: #16a085; outline: none; }
+
+    button.action {
+      padding: 10px 15px;
+      border: none;
+      background: #16a085;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    button.action:hover { background: #138f75; transform: translateY(-2px); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #16a085;
+      color: white;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    @media(max-width: 768px){
+      .sidebar { width: 60px; }
+      .sidebar h2 { display: none; }
+      .sidebar a { justify-content: center; }
+      .form-inline { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Paryavaran</h2>
+    <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="manage-products.html"><i class="fas fa-box"></i> Products</a>
+    <a href="manage-orders.html"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="manage-users.html" class="active"><i class="fas fa-users"></i> Users</a>
+    <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Shop</a>
+    <a href="logout.html"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Manage Users</h1>
+
+    <!-- Add User Form -->
+    <div class="form-inline">
+      <input type="text" id="userName" placeholder="Name">
+      <input type="email" id="userEmail" placeholder="Email">
+      <input type="password" id="userPassword" placeholder="Password">
+      <button class="action" onclick="addUser()"><i class="fas fa-user-plus"></i> Add User</button>
+    </div>
+
+    <!-- Users Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Email</th><th>Password</th>
+        </tr>
+      </thead>
+      <tbody id="userTable"></tbody>
+    </table>
+  </div>
+
+  <script>
+    let users = [];
+
+    function renderUsers() {
+      const tbody = document.getElementById("userTable");
+      tbody.innerHTML = "";
+      users.forEach((u, index) => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${u.name}</td>
+            <td>${u.email}</td>
+            <td>${u.password}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function addUser() {
+      const name = document.getElementById("userName").value.trim();
+      const email = document.getElementById("userEmail").value.trim();
+      const password = document.getElementById("userPassword").value.trim();
+
+      if(name && email && password) {
+        users.push({ name, email, password });
+        renderUsers();
+        document.getElementById("userName").value = "";
+        document.getElementById("userEmail").value = "";
+        document.getElementById("userPassword").value = "";
+      } else {
+        alert("Please fill in all fields!");
+      }
+    }
+
+    renderUsers();
+    
+  </script>
+
+</body>
+</html>

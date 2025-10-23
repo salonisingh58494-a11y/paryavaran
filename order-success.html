@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Success - Paryavaran</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f9f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .success-box {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    .success-box h1 {
+      color: #2e7d32;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .success-box p {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 2rem;
+    }
+    .success-box a {
+      background: #2e7d32;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background .3s;
+    }
+    .success-box a:hover {
+      background: #1b5e20;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="success-box">
+    <h1>🎉 Order Confirmed!</h1>
+    <p>Your order has been placed successfully with <strong>Cash on Delivery</strong>.<br>
+       You’ll receive a confirmation call soon.</p>
+    <a href="index.html">Continue Shopping</a>
+    <a href="order-history.html" style="margin-left:15px;">View My Orders</a>
+  </div>
+</body>
+</html>

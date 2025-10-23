@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seed page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="seed.css">
+</head>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="logo.jpg" alt="Paryavaran Logo"></div>
+    <nav>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="seed.html"><i class="fa-solid fa-seedling"></i> Seed</a>
+      <a href="ferti.html"><i class="fa-solid fa-tree"></i> Fertiliser</a>
+      <a href="blog.html"><i class="fa-solid fa-envelope"></i> Blog</a>
+    </nav>
+    <div class="user-bar">
+      <section class="search-bar">
+  <input type="text" id="plant-search" placeholder="Search your need.." autocomplete="off"/>
+  <div id="suggestions" class="suggestions"></div>
+</section>
+      <a href="registration.html" title="Register"><i class="fa-solid fa-user-plus"></i></a>
+      <a href="login.html" title="Login"><i class="fa-solid fa-right-to-bracket"></i></a>
+      <i class="fa-solid fa-cart-shopping" title="Cart"></i>
+      <a href="profile.html" title="Profile" class="profile"></a>
+    </div>
+  </header>
+  <div class="main-content">
+    <div class="sidebar">
+      <div class="logos"></div>
+      <ul class="menu">
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-clover"></i><span>Flower Seeds</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-carrot"></i><span>Vegetable Seeds</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-pepper-hot"></i><span>Microgreen Seeds</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-gem"></i><span>Herb Seeds</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-spa"></i><span>Flower Bulbs</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-cannabis"></i><span>Fruit Seeds</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-leaf"></i><span>Tree & Grass Seeds</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="marquee">
+        <div class="track">
+          <img src="indoor-plants/flax seed.jpg" alt="image" />
+          <img src="indoor-plants/moong seed.webp" alt="image" />
+          <img src="indoor-plants/sunflowerseed2.avif" alt="image" />
+          <img src="indoor-plants/tulip seed.jpg" alt="image" />
+          <img src="indoor-plants/Wheat seed.jpg" alt="image" />
+          <img src="indoor-plants/rajma seed.webp" alt="image" />
+          <img src="indoor-plants/pumpkin seed.jpg" alt="image" />
+          <img src="indoor-plants/sabja falooda seed.jpg" alt="image" />
+          <img src="indoor-plants/fenugreek seeds.jpg" alt="image">
+          <img src="indoor-plants/flax seed.jpg" alt="image" />
+          <img src="indoor-plants/moong seed.webp" alt="image" />
+          <img src="indoor-plants/sunflowerseed2.avif" alt="image" />
+          <img src="indoor-plants/tulip seed.jpg" alt="image" />
+          <img src="indoor-plants/Wheat seed.jpg" alt="image" />
+          <img src="indoor-plants/rajma seed.webp" alt="image" />
+          <img src="indoor-plants/pumpkin seed.jpg" alt="image" />
+          <img src="indoor-plants/sabja falooda seed.jpg" alt="image" />
+        </div>
+      </div>
+      <h2 class="section-title">Plant Sayings</h2>
+      <p>Bringing plants home has been a practice for ages now. But have you ever wondered how that really works and why people keep doing so? There's something magical about having live plants in your space. Not only do they bring a slice of nature indoors or to your outdoor gardens but they also bring with them a variety of benefits. They promote an unparalleled sense of tranquility and with Paryavaran’s easy-to-use online platform, you can buy live plants online and experience the joy of nature’s gateways at your fingertips.</p>
+      <div class="controls">
+        <div class="dropdown">
+          <button class="dropbtn">Filter</button>
+          <div id="filterMenu" class="dropdown-content">
+            <a href="#" data-filter="all">All</a>
+            <a href="#" data-filter="organic">Organic</a>
+            <a href="#" data-filter="chemical">Chemical</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">Sort</button>
+          <div id="sortMenu" class="dropdown-content">
+            <a href="#" data-sort="price-asc">Price ↑</a>
+            <a href="#" data-sort="price-desc">Price ↓</a>
+            <a href="#" data-sort="rating-desc">Rating</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-section">
+        <div class="product-grid">
+          <div class="product-card" data-category="organic" data-price="450" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/tulip seed.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Tulip Bulbs</h3>
+            <p class="price">₹899</p>
+            <p class="rating">★★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="250" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/sunflowerseed2.avif" alt="Fertiliser 2">
+            </div>
+            <h3>Sunflower Seeds</h3>
+            <p class="price">₹779</p>
+            <p class="rating">★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="250" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/chia seed.avif" alt="Fertiliser 3">
+            </div>
+            <h3>Chia Seeds</h3>
+            <p class="price">₹630</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="250" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Dahlia Seed.webp" alt="Fertiliser 4">
+            </div>
+            <h3>Dahlia Seeds</h3>
+            <p class="price">₹720</p>
+            <p class="rating">★★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/basil seed.jpg" alt="Basil Seeds">
+            </div>
+            <h3>Basil Seeds</h3>
+            <div class="rating">★★★★☆</div>
+            <div class="price">₹299</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/lavender seed.jpg" alt="Lavender Seeds">
+            </div>
+            <h3>Lavender Seeds</h3>
+            <div class="rating">★★★☆☆</div>
+            <div class="price">₹345</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Peppermint Seeds.jpg" alt="Peppermint Seeds">
+            </div>
+            <h3>Peppermint Seeds</h3>
+            <div class="rating">★★★★☆</div>
+            <div class="price">₹389</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Mustard Seeds.png" alt="Mustard Seeds">
+            </div>
+            <h3>Mustard Seeds</h3>
+            <div class="rating">★★★★★</div>
+            <div class="price">₹199</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Coriander Seeds.jpg" alt="Coriander Seeds">
+            </div>
+            <h3>Coriander Seeds</h3>
+            <div class="rating">★★★★☆</div>
+            <div class="price">₹270</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Fennel Seeds.jpg" alt="Fennel Seeds">
+            </div>
+            <h3>Fennel Seeds</h3>
+            <div class="rating">★★★☆☆</div>
+            <div class="price">₹230</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Rosemary Seeds.jpg" alt="Rosemary Seeds">
+            </div>
+            <h3>Rosemary Seeds</h3>
+            <div class="rating">★★★★☆</div>
+            <div class="price">₹399</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Oregano Seeds.jpg" alt="Oregano Seeds">
+            </div>
+            <h3>Oregano Seeds</h3>
+            <div class="rating">★★★★★</div>
+            <div class="price">₹499</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/lotus seed.jpg" alt="Parsley Seeds">
+            </div>
+            <h3>Lotus Seeds</h3>
+            <div class="rating">★★★★☆</div>
+            <div class="price">₹310</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Dill Seeds.jpg" alt="Dill Seeds">
+            </div>
+            <h3>Dill Seeds</h3>
+            <div class="rating">★★★☆☆</div>
+            <div class="price">₹289</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/Arbi bulbs seeds.webp" alt="Oregano Seeds">
+            </div>
+            <h3>Arbi Bulbs</h3>
+            <div class="rating">★★★★☆</div>
+            <div class="price">₹340</div>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/clove seeds.jpg" alt="Marjoram Seeds">
+            </div>
+            <h3>Clove Seeds</h3>
+            <div class="rating">★★★★☆</div>
+            <div class="price">₹120</div>
+            <button class="view-btn">View Product</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 2rem;">
+        <h3>●Buy Flower Seeds Online</h3><br>
+        <p>Flower seeds are a wonderful way to start a flower garden if you’re looking to create an ornamental display.
+          The process is rewarding and exciting because you get to witness all the stages of your flower’s development,
+          and when you actually see it bloom - the feeling is absolutely exhilarating! So, when you’re able to find some
+          of the best flower seeds online, why do you need to look elsewhere?</p><br>
+
+        <h3>●Growing Flowers From Flower Seeds</h3><br>
+        <p>Even though there are a few flowers that you may not be able to buy in India, you can easily find those
+          flowers if only you grow them! Some of the most exotic blooms can find homes in your garden if you choose to
+          grow them from flower seeds or even flower bulbs.
+          With Paryavaran, you can even find expert guidance if you happen to get stuck somewhere along the process of
+          growing your own flowers from flower plant seeds! Our feature of Dr. Green will allow you not only to tend to
+          your flowers in the best ways possible but also to do away with any other obstacles you may face during the
+          process.</p><br>
+
+        <h3>●Advantages of Growing Flowers from Seeds</h3><br>
+        <p><b>1. Cost-Effective</b><br>If you’re looking for a more budget-friendly option for flowering plants, growing
+          flowers from seeds is your best option! This makes them a great option for gardeners, especially those looking
+          to cover larger areas or experiment with various flower varieties.</p><br>
+
+        <p><b>2. Flower Seeds Offer a Wide Variety</b><br>Growing flowers from seeds opens up a vast array of options in
+          terms of species, colors, sizes, and bloom times. You will have the freedom to choose from a diverse selection
+          of flowers to suit your exact preferences and the specific requirements of any garden space you may have.</p>
+        <br>
+
+        <p><b>3. Customization</b><br>Seed starting will allow you to customize your flower beds according to their
+          unique preferences and needs. Whether creating a wildflower meadow, a cottage garden, or a formal flower
+          border, you can tailor your selections to achieve the desired aesthetic and functionality. Some flowers are
+          also fit for container gardening, meaning you can start those seeds in small containers and upgrade them to
+          bigger ones as they grow.</p><br>
+
+        <p><b>4. Satisfaction of Growing from Scratch</b><br>As we said, there is an unparalleled sense of satisfaction
+          that comes from successfully nurturing a plant from seed to bloom. Witnessing the entire growth process
+          firsthand, from tiny seeds sprouting to vibrant flowers in full bloom, can be immensely rewarding and
+          fulfilling.</p><br>
+
+        <h3>●Online Flower Seeds You Can Buy :</h3>
+        <p><b>1. Chrysanthemum Mix Flower Seeds</b><br>These wonderful ornamental plants are also called ‘Mums’ and they
+          take a minimum of 16 weeks to bloom when being grown from seeds. When you’re growing this stunning flower from
+          seeds, remember to plant the seeds sometime between June and July.</p>
+        <p><b>2. Dianthus Mix Flower Seeds</b><br>These wonderful flowers, commonly found in many places, are also known
+          for their ornamental properties. They are relatively easy to grow from flower seeds and, as we mentioned, it
+          is quite easy to grow hardy flowers once they are growing from seeds because seeds have high adaptability.</p>
+        <p><b>3. Pansy Mix Seeds</b><br>Pansies, cool-season flowers with vibrant colors, thrive in well-draining soil.
+          Start seeds indoors 8-10 weeks before the last frost or directly sow outdoors in early spring or fall for
+          delightful garden blooms.</p>
+      </div>
+      <div class="quote-strip-container">
+        <div class="quote-strip">
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+          <div class="quote">🌱 "Digging Deep for Delight"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Our Mission</a></li>
+          <li><a href="#">Paryavaran Blog</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Track Your Order</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Rewards</h4>
+        <ul>
+          <li><a href="#">Paryavaran Rewards Program</a></li>
+          <li><a href="#">Refer a Friend</a></li>
+          <li><a href="#">Exclusive Offers</a></li>
+        </ul>
+      </div>
+      <div class="footer-column contact-us-footer">
+        <h4>Contact Us</h4>
+        <p><i class="fa-solid fa-phone"></i> +91 12345 67890</p>
+        <p><i class="fa-solid fa-envelope"></i> info@paryavaran.com</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="newsletter-signup">
+          <h4>Sign Up for Newsletter</h4>
+          <form action="#" method="POST">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Paryavaran. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="seed.js"></script>
+</body>
+
+</html>

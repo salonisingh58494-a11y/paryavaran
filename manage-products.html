@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Products</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; background: #f1f4f9; }
+  .sidebar {
+    width: 220px; height: 100vh; background: #2c3e50; color: #fff; float: left;
+    display: flex; flex-direction: column; padding: 20px; box-sizing: border-box;
+  }
+  .sidebar h2 { margin-top: 0; margin-bottom: 20px; font-size: 20px; }
+  .sidebar a {
+    color: #fff; text-decoration: none; margin: 10px 0; display: flex; align-items: center;
+    padding: 8px; border-radius: 5px;
+  }
+  .sidebar a:hover { background: #16a085; }
+  .main { margin-left: 220px; padding: 20px; }
+  h1 { text-align: center; }
+  .add-product { text-align: center; margin: 20px 0; }
+  .add-product input { padding: 8px; margin-right: 5px; width: 150px; }
+  .add-product button { padding: 8px 12px; background: #16a085; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+  .add-product button:hover { background: #13856e; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; border-radius: 5px; overflow: hidden; }
+  th { background: #16a085; color: #fff; padding: 10px; text-align: left; }
+  td { padding: 10px; border-bottom: 1px solid #ddd; }
+  td input { width: 80px; padding: 5px; }
+  td button { padding: 5px 8px; margin-right: 5px; border: none; border-radius: 5px; cursor: pointer; }
+  .delete-btn { background: #e74c3c; color: #fff; }
+  .delete-btn:hover { background: #c0392b; }
+  .update-btn { background: #2980b9; color: #fff; }
+  .update-btn:hover { background: #1c5980; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Paryavaran</h2>
+    <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="manage-products.html"><i class="fas fa-box"></i> Products</a>
+    <a href="manage-orders.html" class="active"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="manage-users.html"><i class="fas fa-users"></i> Users</a>
+    <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Shop</a>
+    <a href="logout.html"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+<div class="main">
+  <h1>Manage Products</h1>
+  <div class="add-product">
+    <input type="text" id="productName" placeholder="Product Name">
+    <input type="number" id="productPrice" placeholder="Price">
+    <button onclick="addProduct()">+ Add Product</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="productTable"></tbody>
+  </table>
+</div>
+
+<script>
+const API_URL = "http://localhost:5000/api/products";
+
+// Load products
+async function loadProducts() {
+  const res = await fetch(API_URL);
+  const products = await res.json();
+  const table = document.getElementById("productTable");
+  table.innerHTML = "";
+  products.forEach((product, index) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${product.name}</td>
+      <td>₹<input type="number" value="${product.price}" id="price-${product._id}"></td>
+      <td>
+        <button class="delete-btn" onclick="deleteProduct('${product._id}')">Delete</button>
+      </td>
+    `;
+    table.appendChild(tr);
+  });
+}
+
+// Add product
+async function addProduct() {
+  const name = document.getElementById("productName").value;
+  const price = document.getElementById("productPrice").value;
+  if (!name || !price) return alert("Please fill all fields");
+
+  await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, price })
+  });
+  document.getElementById("productName").value = "";
+  document.getElementById("productPrice").value = "";
+  loadProducts();
+}
+
+// Delete product
+async function deleteProduct(id) {
+  await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+  loadProducts();
+}
+
+// Update product price
+async function updateProduct(id) {
+  const price = document.getElementById(`price-${id}`).value;
+  await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ price })
+  });
+  loadProducts();
+}
+
+// Initial load
+loadProducts();
+</script>
+
+</body>
+</html>

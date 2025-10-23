@@ -1,0 +1,267 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - Paryavaran</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; padding: 2rem; background: #f4f9f4; }
+    h2 { color: #2e7d32; margin-bottom: 1rem; }
+    #cart-items { margin-bottom: 2rem; }
+    .cart-item {
+      display: flex; align-items: center; gap: 15px;
+      background: #fff; padding: 1rem; border-radius: 8px;
+      margin-bottom: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
+    .cart-item div { flex: 1; }
+    #cart-total {
+      font-size: 1.4rem; font-weight: bold; color: #1b5e20;
+      margin-bottom: 1.5rem;
+    }
+    .checkout-section {
+      padding: 1.5rem; border: 1px solid #ccc; border-radius: 8px;
+      background: #e8f5e9;
+    }
+    .checkout-section h3 { margin-bottom: 1rem; color: #2e7d32; }
+    .checkout-section label { display: block; margin-bottom: 0.8rem; font-size: 1rem; }
+    #place-order {
+      margin-top: 1rem;
+      background: #2e7d32; color: #fff;
+      border: none; padding: 0.8rem 1.6rem;
+      border-radius: 6px; font-size: 1rem;
+      cursor: pointer; transition: background .3s;
+    }
+    #place-order:hover { background: #1b5e20; }
+  </style>
+</head>
+<body>
+  <h2>🛒 Your Shopping Cart</h2>
+  <div id="cart-items"></div>
+  <h3 id="cart-total"></h3>
+
+  <div class="checkout-section">
+    <h3>Checkout</h3>
+    <label><input type="radio" name="payment" value="cod" checked> Cash on Delivery (COD)</label>
+    <label><input type="radio" name="payment" value="online" disabled> Online Payment (Coming Soon)</label>
+    <button id="place-order">Place Order</button>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const placeOrderBtn = document.getElementById("place-order");
+
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        total += item.price;
+        cartItems.innerHTML += `
+          <div class="cart-item">
+            <img src="${item.img}" alt="${item.name}">
+            <div>
+              <strong>${item.name}</strong><br>
+              ₹${item.price}
+            </div>
+          </div>
+        `;
+      });
+      cartTotal.textContent = "Total: ₹" + total;
+    }
+
+    // ✅ COD Checkout
+    placeOrderBtn.addEventListener("click", () => {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      const payment = document.querySelector('input[name="payment"]:checked').value;
+
+      if (payment === "cod") {
+        alert("✅ Order placed successfully with Cash on Delivery!");
+
+        // Save order history
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.push({ items: cart, payment: "COD", total, date: new Date().toLocaleString() });
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        // Clear cart
+        localStorage.removeItem("cart");
+        window.location.href = "order-success.html";
+      }
+    });
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - Paryavaran</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+      background: #f4f9f4;
+    }
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    #cart-items { margin-bottom: 2rem; }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform .2s;
+    }
+    .cart-item:hover { transform: scale(1.02); }
+    .cart-item img {
+      width: 80px; height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .cart-item div { flex: 1; }
+    .remove-btn {
+      background: #e53935;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .remove-btn:hover { background: #b71c1c; }
+    #cart-total {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #1b5e20;
+      margin-bottom: 1.5rem;
+      text-align: right;
+    }
+    .checkout-section {
+      padding: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #e8f5e9;
+    }
+    .checkout-section h3 { margin-bottom: 1rem; color: #2e7d32; }
+    .checkout-section label {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+    #place-order, .back-btn {
+      margin-top: 1rem;
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    #place-order:hover, .back-btn:hover {
+      background: #1b5e20;
+    }
+    .back-btn {
+      background: #81c784;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🛒 Your Shopping Cart</h2>
+  <div id="cart-items"></div>
+  <h3 id="cart-total"></h3>
+
+  <div class="checkout-section">
+    <h3>Checkout</h3>
+    <label><input type="radio" name="payment" value="cod" checked> Cash on Delivery (COD)</label>
+    <label><input type="radio" name="payment" value="online" disabled> Online Payment (Coming Soon)</label>
+    <button class="back-btn" onclick="window.location.href='index.html'">← Back to Shop</button>
+    <button id="place-order">Place Order</button>
+  </div>
+
+  <script>
+    const cartContainer = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+      cartContainer.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotal.textContent = "";
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div>
+            <strong>${item.name}</strong><br>
+            ₹${item.price}
+          </div>
+          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        `;
+        cartContainer.appendChild(div);
+      });
+
+      cartTotal.textContent = "Total: ₹" + total;
+    }
+
+    function removeItem(index) {
+      if (confirm("Remove this item from your cart?")) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+    }
+
+    document.getElementById("place-order").addEventListener("click", () => {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      const payment = document.querySelector('input[name="payment"]:checked').value;
+      if (payment === "cod") {
+        alert("✅ Order placed successfully with Cash on Delivery!");
+
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.push({
+          items: cart,
+          payment: "COD",
+          total: cart.reduce((sum, item) => sum + item.price, 0),
+          date: new Date().toLocaleString()
+        });
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        localStorage.removeItem("cart");
+        window.location.href = "order-success.html";
+      }
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

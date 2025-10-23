@@ -1,0 +1,1261 @@
+:root {
+  --green-light: #d4f1c5;
+  --green: #7ab55c;
+  --green-dark: #3b673d;
+  --font: 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--green-light);
+  color: var(--green-dark);
+}
+
+/* Header */
+header {
+  background: var(--green);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Base link style */
+nav a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  padding: 0 .5rem;
+}
+
+/* Create a hidden underline */
+nav a::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+/* Reveal the underline on hover */
+nav a:hover::before {
+  transform: scaleX(1);
+}
+
+
+@keyframes underline {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
+}
+
+.user-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-bar i,
+.user-bar .material-symbols-outlined {
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.user-bar .profile {
+  width: 42px;
+  height: 42px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: url('indoor-plants/tulip.webp') center/cover no-repeat;
+}
+/* Menu button */
+    .menu-btn {
+      font-size: 24px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: #fff;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 40px; /* below button */
+      right: 0;
+      background: #fff;
+      min-width: 150px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .dropdown-content a:hover {
+      background: #f1f1f1;
+    }
+
+    /* Show dropdown */
+    .dropdown.show .dropdown-content {
+      display: block;
+    }
+/* Hero */
+.hero {
+  position: relative;
+  background: url('indoor-plants/biodiversity-within-forests-1.jpg')center/cover;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: heroFade 4s ease-out;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(122, 181, 92, .6), rgba(59, 103, 61, .6));
+  animation: pulseBg 5s ease-in-out infinite;
+  z-index: 0;
+}
+
+.hero>* {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeup .8s forwards;
+}
+
+.hero h1 {
+  animation-delay: .4s;
+  font-size: 4rem;
+  margin-bottom: .5rem;
+}
+
+.hero p {
+  animation-delay: .5s;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.hero .btn-primary {
+  animation-delay: .7s;
+  background: var(--green-dark);
+  border: none;
+  color: #fff;
+  padding: .8rem 1.6rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background .3s;
+}
+
+.btn-primary:hover {
+  background: #2f542e;
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes pulseBg {
+
+  0%,
+  100% {
+    opacity: .4
+  }
+
+  50% {
+    opacity: .8
+  }
+}
+
+@keyframes fadeup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search bar */
+.search-bar {
+  text-align: center;
+  padding: 1rem;
+}
+
+#plant-search {
+  width: 80%;
+  max-width: 600px;
+  padding: .8rem 1rem;
+  font-size: 0.8rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  transition: border-color .3s;
+  border-radius: 80px;
+}
+
+#plant-search:focus {
+  border-color: var(--green);
+  outline: none;
+}
+.suggestions {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  width: 220px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+  border-radius: 5px;
+}
+.suggestions div {
+  padding: 8px;
+  cursor: pointer;
+}
+.suggestions div:hover {
+  background: #e6f7ee;
+}
+
+.promo-banners {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 60px 30px;
+}
+
+.promo-card {
+  position: relative;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease;
+  display: flex;
+  align-items: flex-end;
+}
+
+.promo-card:hover {
+  transform: scale(1.03);
+}
+
+.promo-content {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20px;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.promo-content h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.promo-content p {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.shop-btn {
+  background-color: #a3d977;
+  color: #222;
+  padding: 8px 16px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.shop-btn:hover {
+  background-color: #8bc34a;
+  color: #fff;
+}
+
+.scrolling-gallery {
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem 0;
+  background: #d4f1c5;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+}
+
+.gallery-track {
+  display: flex;
+  width: max-content;
+  animation: scrollGallery 60s linear infinite;
+}
+
+.gallery-track img {
+  height: 300px;
+  width: auto;
+  margin: 0 1rem;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.gallery-track img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes scrollGallery {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* Product cards grid */
+.product-cards {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.product,
+.plant-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.product:hover,
+.plant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product img,
+.plant-card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  filter: brightness(.9);
+  transition: filter .5s;
+}
+
+.product img:hover,
+.plant-card img:hover {
+  filter: brightness(1);
+}
+
+.product-info,
+.plant-card .info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info h3,
+.plant-card h3 {
+  margin-bottom: .5rem;
+  color: var(--green-dark);
+}
+
+.product-info p,
+.plant-card p {
+  color: #555;
+  flex: 1;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Badges, rating & price */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: .5rem;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  background: #e0f7e9;
+  color: var(--green-dark);
+  font-size: 0.8rem;
+  padding: .25rem .6rem;
+  border-radius: 4px;
+  transition: background .3s;
+}
+
+.badge:hover {
+  background: #c2ebd3;
+}
+
+.rating {
+  color: #f5a623;
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--green-dark);
+  margin-bottom: .5rem;
+}
+
+/* Add to cart button on product */
+.product-info button {
+  background: var(--green);
+  border: none;
+  color: #fff;
+  padding: .8rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .3s;
+}
+
+.product-info button:hover {
+  background: var(--green-dark);
+}
+
+.product-info button i {
+  margin-right: .5rem;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s;
+}
+
+.modal.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  animation: zoomIn .3s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(.8);
+    opacity: 0
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.0rem;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: #031707;
+}
+
+/* Animated Add to Cart Button */
+.add-cart-btn {
+  background: var(--green-dark);
+  color: #fff;
+  padding: .8rem 1.6rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .3s ease, transform .2s ease;
+  position: relative;
+}
+
+.add-cart-btn i {
+  margin-right: .6rem;
+  font-size: 1.0rem;
+}
+
+.add-cart-btn:hover {
+  background: #3b673d;
+  transform: translateY(-2px);
+}
+
+.add-cart-btn:active {
+  transform: scale(0.98);
+}
+
+.add-cart-btn.added {
+  background: #2a4e32;
+}
+
+.add-cart-btn.added i {
+  animation: cart-flip 0.5s ease forwards;
+}
+
+.add-cart-btn.added span {
+  animation: text-slide 0.5s ease forwards;
+}
+
+.add-cart-btn.added::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%) scale(0);
+  font-size: 1.0rem;
+  color: #fff;
+  animation: pop-in 0.4s ease-out forwards;
+}
+
+@keyframes pop {
+  0% {
+    transform: translateY(-50%) scale(0);
+    opacity: 0;
+  }
+
+  60% {
+    transform: translateY(-50%) scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+
+/* Gallery section */
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  margin: 20px auto;
+  border-radius: 16px;
+  color: white;
+  height: 400px;
+  width: 90%;
+  max-width: 1200px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  /* Dark overlay */
+  z-index: 0;
+}
+
+.text {
+  position: relative;
+  max-width: 60%;
+  z-index: 1;
+  animation: slideInLeft 1.2s ease forwards;
+}
+
+.text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin: 0 0 15px;
+}
+
+.text p {
+  font-size: 1.0rem;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.banner:hover {
+  animation: pulse 1.2s infinite;
+}
+
+.banner1 {
+  background-image: url('indoor-plants/fert9.jpg');
+}
+
+.banner2 {
+  background-image: url('indoor-plants/moneyplant.jpg');
+}
+
+.banner3 {
+  background-image: url('indoor-plants/cmoneyplant.webp');
+}
+
+.banner4 {
+  background-image: url('indoor-plants/bonsai.jpg');
+}
+
+.banner5 {
+  background-image: url('indoor-plants/fertiliser3.jpg');
+}
+
+@media (max-width: 768px) {
+  .text {
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .text h1 {
+    font-size: 2.5rem;
+  }
+
+  .text p {
+    font-size: 1.0rem;
+  }
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-top: 1rem;
+}
+
+.section-title::after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background: var(--green);
+  display: block;
+  margin: .5rem auto;
+  border-radius: 2px;
+}
+
+.quotes {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.quotes p {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.quotes p::before {
+  content: '“';
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  font-size: 2.0rem;
+  color: var(--green-dark);
+}
+
+.quotes p::after {
+  content: '”';
+  position: absolute;
+  bottom: -10px;
+  right: -20px;
+  font-size: 2.0rem;
+  color: var(--green-dark);
+}
+
+/* Container */
+.contact-section {
+  padding: 3rem 1rem;
+  background: var(--green-light);
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Info Panel */
+.contact-info h2 {
+  margin-bottom: 0.5rem;
+  color: var(--green-dark);
+  font-size: 2.0rem;
+}
+
+.contact-info p {
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  color: var(--green-dark);
+}
+
+.contact-info li i {
+  margin-right: 0.8rem;
+  color: var(--green-dark);
+  font-size: 1.5rem;
+}
+
+/* Form */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color .3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--green);
+  outline: none;
+}
+
+.contact-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.send-btn {
+  background: var(--green);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.0rem;
+  cursor: pointer;
+  transition: background .3s;
+}
+
+.send-btn:hover {
+  background: var(--green-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer */
+footer {
+  background: var(--green-dark);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.0rem;
+}
+
+/* Mobile adjustments */
+@media (max-width:768px) {
+  nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  .product-info button {
+    justify-content: center;
+  }
+}
+
+@media (max-width:600px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .gallery img {
+    width: calc(50% - 1rem);
+  }
+}
+
+.sale-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2.0rem 0 1.0rem;
+  font-size: 5.5rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  animation: fadeIn 2s ease-in-out;
+}
+
+.discount-board {
+  background: rgba(255, 255, 255, 0.85);
+  color: #2e7d32;
+  padding: 1.2rem 2.5rem;
+  border-radius: 20px;
+  font-size: 1.5rem;
+  display: inline-block;
+  margin: 1.5rem auto 3rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: pulse 2.5s ease-in-out infinite;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 150%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.slider-wrapper img {
+  width: 150%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.0rem;
+}
+
+.item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 15px;
+  border: 1px solid #047524;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.item:hover {
+  transform: scale(1.05);
+  background: rgba(168, 230, 207, 0.1);
+}
+
+.item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.discount {
+  background-color: #66bb6a;
+  color: #fff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+  display: inline-block;
+}
+
+.item h2 {
+  color: #66a502;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.item p {
+  font-size: 0.95rem;
+  color: #66a502;
+}
+
+.rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 1px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .user-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ... your existing CSS ... */
+
+/* Chatbot Styles */
+.chatbot-toggler {
+  position: fixed;
+  right: 40px;
+  bottom: 35px;
+  height: 70px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: #1b4d2a;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chatbot-toggler span {
+  position: absolute;
+}
+
+.show-chatbot .chatbot-toggler span:first-child,
+.chatbot-toggler span:last-child {
+  opacity: 0;
+}
+
+.show-chatbot .chatbot-toggler span:last-child {
+  opacity: 1;
+}
+
+.chatbot {
+  position: fixed;
+  right: 40px;
+  bottom: 100px;
+  width: 420px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+    0 32px 64px -48px rgba(0, 0, 0, 0.5);
+  transform: scale(0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.1s ease;
+  transform-origin: bottom right;
+}
+
+.show-chatbot .chatbot {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chatbot header {
+  background: #1b4d2a;
+  padding: 16px 0;
+  text-align: center;
+  position: relative;
+}
+
+.chatbot header h2 {
+  color: #fff;
+  font-size: 2.0rem;
+}
+
+.chatbot header .close-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  color: #fff;
+  cursor: pointer;
+  transform: translateY(-50%);
+  display: none;
+}
+
+.chatbot .chatbox {
+  height: 510px;
+  overflow-y: auto;
+  padding: 30px 20px 100px;
+}
+
+.chatbox .chat {
+  display: flex;
+}
+
+.chatbox .incoming span {
+  height: 32px;
+  width: 32px;
+  color: #fff;
+  background: #1b4d2a;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 4px;
+  margin: 0 10px 7px 0;
+}
+
+.chatbox .outgoing {
+  margin: 20px 0;
+  justify-content: flex-end;
+}
+
+.chatbox .chat p {
+  color: #fff;
+  max-width: 75%;
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  border-radius: 10px 10px 0 10px;
+  background: #1b4d2a;
+}
+
+.chatbox .incoming p {
+  color: #fff;
+  background: #45ae08;
+  border-radius: 10px 10px 10px 0;
+}
+
+.chatbot .chat-input {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  background: #fff;
+  padding: 5px 20px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input textarea {
+  height: 55px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  resize: none;
+  padding: 16px 15px 16px 0;
+}
+
+.chat-input span {
+  font-size: 1.75rem;
+  color: #1b4d2a;
+  cursor: pointer;
+  height: 55px;
+  line-height: 55px;
+  visibility: hidden;
+}
+
+.chat-input textarea:valid~span {
+  visibility: visible;
+}
+/* .menu-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+.menu-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+.menu-content a {
+  color: #333;
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+}
+.menu-content a:hover {
+  background: #2e7d32;
+  color: white;
+}
+.menu-dropdown:hover .menu-content {
+  display: block;
+} */

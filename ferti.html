@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fertiliser page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="seed.css">
+</head>
+</head>
+
+<body>
+  <header>
+    <div class="logo"><img src="logo.jpg" alt="Paryavaran Logo"></div>
+    <nav>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="seed.html"><i class="fa-solid fa-seedling"></i> Seed</a>
+      <a href="ferti.html"><i class="fa-solid fa-tree"></i> Fertiliser</a>
+      <a href="blog.html"><i class="fa-solid fa-envelope"></i> Blog</a>
+    </nav>
+    <div class="user-bar">
+      <section class="search-bar">
+  <input type="text" id="plant-search" placeholder="Search your need.." autocomplete="off"/>
+  <div id="suggestions" class="suggestions"></div>
+</section>
+      <a href="registration.html" title="Register"><i class="fa-solid fa-user-plus"></i></a>
+      <a href="login.html" title="Login"><i class="fa-solid fa-right-to-bracket"></i></a>
+      <i class="fa-solid fa-cart-shopping" title="Cart"></i>
+      <a href="profile.html" title="Profile" class="profile"></a>
+    </div>
+  </header>
+  <div class="main-content">
+    <div class="sidebar">
+      <div class="logos"></div>
+      <ul class="menu">
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-clover"></i><span>Cocopeat Block</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-carrot"></i><span>Vermicompost</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-pepper-hot"></i><span>Neem Cake Powder</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-gem"></i><span>Cow Manure</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-spa"></i><span>Bone Meal Fertilizer</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-cannabis"></i><span>Humic Acid Powder Fertilizer</span></a>
+        </li>
+
+        <li class="active">
+          <a href="#"><i class="fa-solid fa-leaf"></i><span>Goat Manure</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="marquee">
+        <div class="track">
+          <img src="indoor-plants/fert1.jpg" alt="image" />
+          <img src="indoor-plants/fert6.webp" alt="image" />
+          <img src="indoor-plants/fert3webp.webp" alt="image" />
+          <img src="indoor-plants/fert8.jpg" alt="image" />
+          <img src="indoor-plants/fert2.webp" alt="image" />
+          <img src="indoor-plants/fert6jpg.jpg" alt="image" />
+          <img src="indoor-plants/fert7.jpg" alt="image" />
+          <img src="indoor-plants/fert7.webp" alt="image" />
+          <img src="indoor-plants/fert4.jpg" alt="image">
+          <img src="indoor-plants/fert9.jpg" alt="image" />
+          <img src="indoor-plants/fert10.jpg" alt="image" />
+          <img src="indoor-plants/fert11.jpg" alt="image" />
+          <img src="indoor-plants/fert11.webp" alt="image" />
+          <img src="indoor-plants/fert12.webp" alt="image" />
+          <img src="indoor-plants/fert13jpg.jpg" alt="image" />
+          <img src="indoor-plants/fert14jpg.jpg" alt="image" />
+        </div>
+      </div>
+      <h2 class="section-title">Nourish your soil!</h2>
+      <p>It's like a grass that is growing, and it cannot stop, and music is like the fertilizer for that. Fertilizer
+        does no good in a heap, but a little spread around works miracles all over. It's a free society. But don't tell
+        the world that we can feed the present population without chemical fertilizer. Paryavaran says "A garden is a
+        complex of aesthetic and plastic intentions; and the plant is, to a landscape artist, not only a plant–rare,
+        unusual, ordinary or doomed to disappearance – but it is also a color, a shape, a volume or an arabesque in
+        itself. A seed cannot grow in stone. Compassion is the fertile soil where life grows.” “Every great tragedy
+        forms a fertile soil in which a great recovery can take root and blossom...but only if you plant the seeds."</p>
+      <div class="controls">
+        <div class="dropdown">
+          <button class="dropbtn">Filter</button>
+          <div id="filterMenu" class="dropdown-content">
+            <a href="#" data-filter="all">All</a>
+            <a href="#" data-filter="organic">Organic</a>
+            <a href="#" data-filter="chemical">Chemical</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">Sort</button>
+          <div id="sortMenu" class="dropdown-content">
+            <a href="#" data-sort="price-asc">Price ↑</a>
+            <a href="#" data-sort="price-desc">Price ↓</a>
+            <a href="#" data-sort="rating-desc">Rating</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-section">
+        <div class="product-grid">
+          <div class="product-card" data-category="organic" data-price="450" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert11.webp" alt="Fertiliser 1">
+            </div>
+            <h3>Fertilizer pellets 1kg</h3>
+            <p class="price">₹894</p>
+            <p class="rating">★★★☆</p>
+            <a href="fertilizer-detail.html" class="view-btn">View Product</a>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="250" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert1.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Vermicompost 1.5kg</h3>
+            <p class="price">₹779</p>
+            <p class="rating">★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="250" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert2.webp" alt="Fertiliser 1">
+            </div>
+            <h3>Goat-Manure 500g</h3>
+            <p class="price">₹630</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="250" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert3webp.webp" alt="Fertiliser 1">
+            </div>
+            <h3>Cow-dung manure 250g</h3>
+            <p class="price">₹720</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert7.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Organic manure 1kg</h3>
+            <p class="price">₹956</p>
+            <p class="rating">★★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert8.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Micoorganism based fertiliser 500ml</h3>
+            <p class="price">₹712</p>
+            <p class="rating">★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert11.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Urea fertilizer N46%(Carbamide)</h3>
+            <p class="price">₹499</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert10.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Nitrogen fertilizer</h3>
+            <p class="price">₹920</p>
+            <p class="rating">★★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert12.webp" alt="Fertiliser 1">
+            </div>
+            <h3>Bio-potash fertilizer</h3>
+            <p class="price">₹199</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert13jpg.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Granules fertilizer</h3>
+            <p class="price">₹850</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert14jpg.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Green organic fertilizer</h3>
+            <p class="price">₹250</p>
+            <p class="rating">★★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert4.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Organic vermicompost 500g</h3>
+            <p class="price">₹599</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert6jpg.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Bio Organic fertilizer</h3>
+            <p class="price">₹380</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert6.webp" alt="Fertiliser 1">
+            </div>
+            <h3>Bio-potash 250ml</h3>
+            <p class="price">₹356</p>
+            <p class="rating">★★★★</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert7.webp" alt="Fertiliser 1">
+            </div>
+            <h3>Npk-bio fertilizer 200ml</h3>
+            <p class="price">₹250</p>
+            <p class="rating">★★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+
+          <div class="product-card" data-category="organic" data-price="300" data-rating="4">
+            <div class="image-container">
+              <img src="indoor-plants/fert9.jpg" alt="Fertiliser 1">
+            </div>
+            <h3>Worms grow Organic fertilizer</h3>
+            <p class="price">₹610</p>
+            <p class="rating">★★★☆</p>
+            <button class="view-btn">View Product</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 2rem;">
+        <h3>●Potting Mix, Fertilizers, and Manure for Plants and Your Garden</h3>
+        <p>One of the best ways to do right by your plants is to get them the right kind of care as and when needed.
+          This
+          can be in the form of the correct soil, manure, and fertilizers. You must know and understand the exact
+          requirements of your plants so that you can ensure their optimal growth.
+          Different types of organic fertilizers for plants also boost and enhance different aspects of plant growth;
+          meaning pinpointing what booster your plants need is vital.</p>
+        <h3>●Natural Fertilizers for Plants: What Your Plants Need</h3>
+        <p>Just like we need food to survive, plants require some kind of balanced feed to ensure that they grow well.
+          While
+          you could do everything to ensure this, sometimes you just have to do a little bit more. That’s where organic
+          fertilizers for plants come in. These fertilizers are made from 100% organic materials and usually release
+          nutrients into the soil slowly, ensuring balanced plant food for your green companions.
+          Whether you’re making use of liquid fertilizers, granules, powder-form, or tablets, Paryavaran's carefully
+          curated
+          range of organic fertilizers will bring you unparalleled nutrition for your plants which will ensure all-round
+          nutrition and happy plants!</p>
+        <h3>●Why Your Plants Need The Perfect Potting Mix: Pot-o-Mix to the Rescue</h3>
+        <p>At Paryavaran, we believe that even the smallest details are important, which is why we pay extra attention
+          to
+          every little detail to ensure that your plants’ care requirements will always be met. With our potting mixes,
+          we
+          ensure that all our plants get only the perfect housing quality in terms of the soil they grow in. Of course,
+          every plant has different requirements. That’s why our potting mix & Pot-O-Mix and their compositions differ
+          for
+          each plant! A Peace Lily will have different compositions, whereas a Jade Plant might have something
+          different.
+          In our potting mix, we have mixtures of red soil and cow manure for plants. On the other hand, our Pot-O-Mix
+          is
+          a mixture of around 12 organic materials that ensure unparalleled quality for your plants.</p>
+        <h3>●The Best of Plant Care: Options You Can Choose From</h3>
+        <p>All requirements of all your plants can be met if only you listen to them and find out exactly what they may
+          be
+          lacking. These requirements, once pinpointed, can effortlessly be fulfilled by Ugaoo’s range of organic garden
+          fertilizers, different types of manure for plants, and other plant growth supplements. <br>
+          <b>1. Organic Manure for Plants <br></b>Our Organic Manure is perfect for giving your plants a little boost in
+          the growth department. You can mix in this manure with soil in the amounts that are deemed appropriate
+          according
+          to the packet and the requirements of your plants. <br>
+          <b>2. Grow TAB Plant Fertilizer <br></b>The Grow TAB is your instant solution for plant growth. If you feel
+          like
+          your plants are in need of a little extra push in terms of growth, you can make use of this plant fertilizer
+          by
+          dissolving the tablet in a liter of water and applying directly to the roots or spraying on the plant for the
+          best results. <br>
+          <b>3. Bone Meal for Plants <br></b>This bone meal fertilizer is made from fish bones and decomposed in a
+          sterile
+          environment along with other organic compounds. This helps promote better microbes in soil and root growth for
+          healthier soil. It also helps to increase the phosphorus content in the soil, thus further ensuring proper
+          growth. <br>
+          <b>4. Plant Tonic Liquid Fertilizer <br></b>This tonic has been specially formulated for application to roots
+          and foliage. It enriches both soil and plants, supplying essential nutrients and bio-stimulants. Plant Tonic
+          is
+          a liquid fertilizer, easy and ready to use, making it the perfect feeding companion for your indoor and
+          outdoor
+          plants. <br>
+          <b>5. Plant Growth Sticks <br></b>Super easy to use and convenient for all potted plants, these plant growth
+          sticks are the perfect option for all those days when you don’t have enough time. One stick can last you 45-60
+          days and all you have to do is insert it into the soil. After that, the stick will release nutrients needed by
+          your plants every time you water them. It doesn’t get easier than this! <br>
+        </p>
+        <div class="quote-strip-container">
+          <div class="quote-strip">
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+            <div class="quote">🌱 "Digging Deep for Delight"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Our Mission</a></li>
+          <li><a href="#">Paryavaran Blog</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Track Your Order</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Rewards</h4>
+        <ul>
+          <li><a href="#">Paryavaran Rewards Program</a></li>
+          <li><a href="#">Refer a Friend</a></li>
+          <li><a href="#">Exclusive Offers</a></li>
+        </ul>
+      </div>
+      <div class="footer-column contact-us-footer">
+        <h4>Contact Us</h4>
+        <p><i class="fa-solid fa-phone"></i> +91 12345 67890</p>
+        <p><i class="fa-solid fa-envelope"></i> info@paryavaran.com</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="newsletter-signup">
+          <h4>Sign Up for Newsletter</h4>
+          <form action="#" method="POST">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Paryavaran. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="seed.js"></script>
+</body>
+
+</html>

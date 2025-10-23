@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paryavaran:Plants Nursery Portal</title>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo"><img src="logo.jpg" alt="Paryavaran Logo"></div>
+    <nav>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="seed.html"><i class="fa-solid fa-seedling"></i> Seed</a>
+      <a href="ferti.html"><i class="fa-solid fa-leaf"></i> Fertiliser</a>
+      <a href="blog.html"><i class="fa-solid fa-envelope"></i> Blog</a>
+    </nav>
+
+    <div class="user-bar">
+      <section class="search-bar">
+        <input type="text" id="plant-search" placeholder="Search your need.." autocomplete="off" />
+        <div id="suggestions" class="suggestions"></div>
+      </section>
+
+      <a href="registration.html" title="Register"><i class="fa-solid fa-user-plus"></i></a>
+      <a href="login1.html" title="Login"><i class="fa-solid fa-right-to-bracket"></i></a>
+      <div class="cart-icon" style="position:relative; margin-right:20px;">
+        <a href="login1.html" style="color:#fff; text-decoration:none; font-size:1.2rem;">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cart-count" style="position:absolute; top:-8px; right:-10px; 
+                 background:green; color:white; font-size:0.7rem; 
+                 padding:2px 6px; border-radius:50%;">0</span>
+        </a>
+      </div>
+      <a href="profile.html" title="Profile" class="profile"></a>
+      <div class="dropdown" id="menu">
+      <button class="menu-btn">☰</button>
+      <div class="dropdown-content">
+        <a href="clone.html">Admin Login</a>
+        
+      </div>
+    </div>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <h1>Welcome to Paryavaran</h1>
+    <p>Your go‑to nursery for indoor & outdoor plants</p>
+    <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Browse
+      Plants</button>
+  </section>
+  <h2 class="section-title"> Bestsellers</h2>
+  <section class="promo-banners">
+    <div class="promo-card" style="background-image: url('indoor-plants/kitchengardening.webp');">
+      <div class="promo-content">
+        <h2>Indoor Plants</h2>
+        <p>Green up your living space with air-purifying beauties</p>
+        <a href="shop.html" class="shop-btn">Shop Now</a>
+      </div>
+    </div>
+
+    <div class="promo-card" style="background-image: url('indoor-plants/ornamental.jpg');">
+      <div class="promo-content">
+        <h2>Ornamental plants</h2>
+        <p>Elegant pots that elevate your plant style</p>
+        <a href="shop.html" class="shop-btn">Browse Collection</a>
+      </div>
+    </div>
+
+    <div class="promo-card" style="background-image: url('indoor-plants/litchi seed.avif');">
+      <div class="promo-content">
+        <h2>Seeds</h2>
+        <p>Grow your garden from scratch with premium seeds</p>
+        <a href="seed.html" class="shop-btn">Explore Seeds</a>
+      </div>
+    </div>
+
+    <div class="promo-card" style="background-image: url('indoor-plants/fert10.jpg');">
+      <div class="promo-content">
+        <h2>Fertilizers</h2>
+        <p>Feed your plants with the nutrition they deserve</p>
+        <a href="fertiliser.html" class="shop-btn">See Products</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="scrolling-gallery">
+    <h2 class="section-title"> Plant-parent approved collection.</h2>
+    <div class="gallery-track">
+      <img src="indoor-plants/peace lily.jpg" alt="Plant 1">
+      <img src="indoor-plants/cute plant pot.jpg" alt="Plant 2">
+      <img src="indoor-plants/plant6.avif" alt="Plant 2">
+      <img src="indoor-plants/fertiliser1.jpg" alt="Plant 3">
+      <img src="indoor-plants/christmas-cactus-royalty.jpg" alt="Plant 4">
+      <img src="indoor-plants/plant10.jpg" alt="Plant 5">
+      <img src="indoor-plants/plant8.jpg" alt="Plant 6">
+      <img src="indoor-plants/plant7.avif" alt="Plant 7">
+      <img src="indoor-plants/peacock plant.jpg" alt="Plant 8">
+      <img src="indoor-plants/begonia rex red heart.webp" alt="Plant 9">
+      <img src="indoor-plants/birdofparadise plant.jpg" alt="Plant 10">
+      <img src="indoor-plants/plant6.avif" alt="Plant 11">
+
+      <!-- Repeat once for smooth loop -->
+      <img src="indoor-plants/plant1.webp" alt="Plant 1">
+      <img src="indoor-plants/plant6.avif" alt="Plant 2">
+      <img src="indoor-plants/plant2.jpg" alt="Plant 3">
+      <img src="indoor-plants/plant3.jpg" alt="Plant 4">
+    </div>
+  </section>
+
+
+  <section id="products">
+    <h2 class="section-title">Bring Nature Home</h2>
+    <div id="plant-grid" class="product-cards"><!-- Plant grid via JS --></div>
+  </section>
+  <main>
+    <div class="sale-header">
+      <h1>Paryavaran Sale!</h1>
+      <div class="discount-board">Up to 40% Off on All Plants!</div>
+    </div>
+
+    </div>
+    <div class="container">
+      <!-- Repeat this block for each product -->
+      <div class="item">
+        <img src="indoor-plants/chia seed.avif" alt="Seeds" />
+        <div class="discount">30% OFF</div>
+        <h2>Seeds</h2>
+        <p>High-quality seeds for your garden and farm.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/fertiliser3.webp" alt="Fertilizer" />
+        <div class="discount">20% OFF</div>
+        <h2>Fertilizer</h2>
+        <p>Organic and chemical fertilizers to boost growth.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/ceramic pot.webp" alt="Ceramic Pots">
+        <div class="discount">25% OFF</div>
+        <h2>Ceramic Pots</h2>
+        <p>Handcrafted ceramic pots in beautiful designs.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/ornamental.jpg" alt="Ornamental Plants">
+        <div class="discount">15% OFF</div>
+        <h2>Ornamental Plants</h2>
+        <p>Beautify your home with our ornamental collection.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/tools.jpg" alt="Gardening Tools">
+        <div class="discount">35% OFF</div>
+        <h2>Gardening Tools</h2>
+        <p>Everything you need to care for your green friends.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/planters.jpg" alt="Planters">
+        <div class="discount">40% OFF</div>
+        <h2>Planters</h2>
+        <p>Stylish and sustainable planters for all spaces.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/bent.jpg" alt="Bent Scraper">
+        <div class="discount">23% OFF</div>
+        <h2>Bent Scraper</h2>
+        <p>Superior quality blade that removes weeds.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/spikes.jpg" alt="Self watering Spikes">
+        <div class="discount">30% OFF</div>
+        <h2>Self watering Spikes</h2>
+        <p>Go-to auto watering system for plants.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/Exotic Flower Seeds.jpg" alt="Bent Scraper">
+        <div class="discount">23% OFF</div>
+        <h2>Exotic Flower Seeds</h2>
+        <p>Superior quality with coloring nature.</p>
+      </div>
+      <div class="item">
+        <img src="indoor-plants/planterss.jpg" alt="Bent Scraper">
+        <div class="discount">23% OFF</div>
+        <h2>Begonia rex red heart plants</h2>
+        <p>Elegance in every vein.</p>
+      </div>
+    </div>
+  </main>
+  <div class="rain" id="rain"></div>
+  <div class="container" style="margin-top: 4rem;">
+    <div
+      style="display: flex; flex-wrap: wrap; background: #fefaf3; color: #333; border-radius: 20px; overflow: hidden; animation: fadeSlideIn 1s ease-out;">
+      <div style="flex: 1 1 45%; min-width: 300px; position: relative;">
+        <img id="mainImage" src="indoor-plants/Arecapalm3.webp"
+          style="width: 100%; height: auto; transition: opacity 0.5s ease-in-out;" alt="Areca Palm">
+      </div>
+      <div style="flex: 1 1 45%; padding: 2rem;">
+        <h2 style="color: #1b4d2a; font-size: 2rem; margin-bottom: 0.5rem;">Deal Of The Week</h2>
+        <h1 style="font-size: 2.5rem; margin: 0;">Areca Palm Plant XL</h1>
+        <div
+          style="background-color: #1b4d2a; color: white; display: inline-block; padding: 5px 10px; margin-top: 10px; border-radius: 5px; font-size: 0.9rem;">
+          4.96 ★ | 124</div>
+        <p style="font-size: 1.5rem; margin-top: 1rem; color: #147d4d;">&#8377;2,749 <span
+            style="text-decoration: line-through; color: #888;">&#8377;2,999</span> <strong
+            style="color: #009e60;">(&#8377;250 OFF)</strong></p>
+
+        <div style="margin-top: 1rem; display: flex; align-items: center;">
+          <button onclick="changeQty(-1)" style="padding: 5px 12px; font-size: 1.2rem;">-</button>
+          <span id="qty" style="margin: 0 1rem; font-size: 1.2rem;">1</span>
+          <button onclick="changeQty(1)" style="padding: 5px 12px; font-size: 1.2rem;">+</button>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+          <button
+            style="background-color: #147d4d; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">Add
+            To Cart</button>
+          <button
+            style="border: 2px solid #147d4d; color: #147d4d; padding: 10px 20px; border-radius: 8px; background: none; cursor: pointer;">BUY
+            NOW</button>
+        </div>
+
+        <p style="margin-top: 2rem; color: #555; line-height: 1.6;">Once an endangered species, the Areca Palm is a
+          staple in Indian spaces. This excellent air purifier is pet friendly and easy to grow. Its delicate fronds
+          grow outwards in a curved manner and add a tropical feel to any space.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner banner1">
+    <div class="text">
+      <h1>Bring Nature Indoors</h1>
+      <p>Discover our elegant collection of air-purifying indoor plants for every corner of your home.</p>
+    </div>
+  </div>
+
+  <div class="banner banner2">
+    <div class="text">
+      <h1>Floral Beauty That Lasts</h1>
+      <p>Choose from handpicked flowers in artisanal pots — perfect for gifting or home décor.</p>
+    </div>
+  </div>
+
+  <div class="banner banner3">
+    <div class="text">
+      <h1>Succulent Love</h1>
+      <p>Low-maintenance, high-style: our succulents bring fresh vibes to your shelves and tables.</p>
+    </div>
+  </div>
+
+  <div class="banner banner4">
+    <div class="text">
+      <h1>Bonsai Elegance</h1>
+      <p>Experience peace and mindfulness with our curated collection of indoor bonsai trees.</p>
+    </div>
+  </div>
+
+  <div class="banner banner5">
+    <div class="text">
+      <h1>Green Up Your Space</h1>
+      <p>Turn your interiors into a green sanctuary with our diverse selection of houseplants.</p>
+    </div>
+  </div>
+  <section id="quotes">
+    <h2 class="section-title">Plant Sayings</h2>
+    <div class="quotes">
+      <p>Plants are silent poems that paint our lives in bright colors.</p>
+      <p>Every mighty tree began as a small seed.</p>
+      <p>To nurture a plant is to give it the love it needs to thrive.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you! Reach out with your questions, orders, or custom plant requests.</p>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i>123 Green Leaf Lane, Surat, Gujarat</li>
+          <li><i class="fas fa-phone"></i>+91 98765 43210</li>
+          <li><i class="fas fa-envelope"></i>info@paryavaran.com</li>
+          <li><i class="fas fa-clock"></i>Mon–Fri, 9 AM–6 PM</li>
+        </ul>
+      </div>
+      <div class="contact-form">
+        <form>
+          <div class="form-row">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+          </div>
+          <input type="text" placeholder="Subject" required>
+          <textarea rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit" class="send-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="chatbot-container">
+    <div class="chatbot-toggler">
+      <span class="material-symbols-outlined">smart_toy</span>
+      <span class="material-symbols-outlined">close</span>
+    </div>
+    <div class="chatbot">
+      <header>
+        <h2>Paryavaran Assistant</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+      </header>
+      <ul class="chatbox">
+        <li class="chat incoming">
+          <span class="material-symbols-outlined">smart_toy</span>
+          <p>Hi there! I'm the Paryavaran Assistant. How can I help you today?</p>
+        </li>
+      </ul>
+      <div class="chat-input">
+        <textarea placeholder="Ask me a question..." required></textarea>
+        <span id="send-btn" class="material-symbols-outlined">send</span>
+      </div>
+    </div>
+  </div>
+  <footer>&copy; 2024 Paryavaran Nursery • Quality Plants & Great Service</footer>
+
+  <!-- Modal for plant detail -->
+  <div id="plant-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <img id="modal-img" src="" alt="" style="width:100%; height:auto; border-radius:5px; margin-bottom:1rem;">
+      <h2 id="modal-name" style="margin-bottom:.5rem;"></h2>
+      <p id="modal-about" style="margin-bottom:.5rem;"></p>
+      <p id="modal-why" style="margin-bottom:1rem; font-style:italic;"></p>
+      <button class="add-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
